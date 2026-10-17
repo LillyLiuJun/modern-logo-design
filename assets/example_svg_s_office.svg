@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    示例：圆角方块 + 负空间 S（办公 / 屏幕意象）
+    模数 w = 74（S 通道宽）
+    方块 540×540，圆角 60；S 三条横向通道中线 y = 357 / 500 / 643（间距 143）
+    S 转角为中线半径 50 的圆弧；整体 180° 中心对称
+    布尔运算：方块 − S 通道（mask 中黑色部分被挖掉）
+  -->
+  <rect id="bg" width="1024" height="1024" fill="#F7F7F5"/>
+  <defs>
+    <mask id="cut">
+      <rect width="1024" height="1024" fill="#fff"/>
+      <path d="M 666 357 H 423 A 50 50 0 0 0 373 407 V 450 A 50 50 0 0 0 423 500 H 599 A 50 50 0 0 1 649 550 V 593 A 50 50 0 0 1 599 643 H 356"
+            fill="none" stroke="#000" stroke-width="74" stroke-linecap="round" stroke-linejoin="round"/>
+    </mask>
+  </defs>
+  <g id="skeleton" fill="#1A1A1A">
+    <rect x="242" y="242" width="540" height="540" rx="60" mask="url(#cut)"/>
+  </g>
+</svg>
