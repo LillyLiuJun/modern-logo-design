@@ -89,10 +89,7 @@ When you see "environment ready", you're all set.
 
 ### 2. Start Designing
 
-In your Claude Code / Agent conversation, you can start with a simple sentence (the agent will ask follow-up questions to gather details):
-> Design a logo for "[Product Name]"
-
-**Or provide key background context upfront for the most accurate and unique directions:**
+In your Claude Code / Agent conversation, just say it, with the background written out in one go (the more specific, the more focused and less generic the directions):
 
 > **Full Prompt Example (Poplex):**
 >
