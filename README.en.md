@@ -79,11 +79,7 @@ cp .env.example .env
 
 **Step 3: Open `.env`, pick one image provider, and fill in only its key**
 
-| To use | Set `IMAGE_PROVIDER` to | Then fill in |
-|---|---|---|
-| Gemini (Nano Banana) | `gemini` | `GEMINI_API_KEY` |
-| ChatGPT (OpenAI) | `openai` | `OPENAI_API_KEY` |
-| Doubao (Seedream) | `doubao` | `DOUBAO_API_KEY` |
+`IMAGE_PROVIDER` can be `gemini`, `openai` (ChatGPT) or `doubao`; the matching keys are `GEMINI_API_KEY`, `OPENAI_API_KEY` and `DOUBAO_API_KEY`.
 
 For example, with Gemini:
 

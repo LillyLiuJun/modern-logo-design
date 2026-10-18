@@ -79,11 +79,7 @@ cp .env.example .env
 
 **第 3 步：打开 `.env`，选一家图像模型，只填它的 Key**
 
-| 想用 | `IMAGE_PROVIDER` 填 | 再填这一项 |
-|---|---|---|
-| Gemini（Nano Banana） | `gemini` | `GEMINI_API_KEY` |
-| ChatGPT（OpenAI） | `openai` | `OPENAI_API_KEY` |
-| 豆包（Seedream） | `doubao` | `DOUBAO_API_KEY` |
+`IMAGE_PROVIDER` 可选 `gemini`、`openai`（ChatGPT）、`doubao`（豆包），对应的 Key 是 `GEMINI_API_KEY`、`OPENAI_API_KEY`、`DOUBAO_API_KEY`。
 
 例如用 Gemini：
 
