@@ -89,14 +89,24 @@ When you see "environment ready", you're all set.
 
 ### 2. Start Designing
 
-In your Claude Code / Agent conversation, simply say:
+In your Claude Code / Agent conversation, you can start with a simple sentence (the agent will ask follow-up questions to gather details):
 > Design a logo for "[Product Name]"
 
-The skill will guide you through the 5-stage workflow, generating interactive HTML review pages at each round for visual comparison and diagnosis.
+**Or provide key background context upfront for the most accurate and unique directions:**
 
-## Scripts
+> **Full Prompt Example:**
+> 
+> Design a logo for "ReflectFlow":
+> 1. **Product & Context**: An asynchronous deep-work log tool for remote developers, frequently living in macOS menu bars and web workspaces.
+> 2. **Core Vibe**: Calm, rational, structured, focused (strictly avoid clichés like checkmarks, gears, brain maps, or chat bubbles).
+> 3. **Mark Type Preference**: Abstract geometric symbol or a modular variation of initial "R", featuring disciplined negative space or continuous curvature tension.
+> 4. **Visual References**: Lean towards the OS-grade restraint and mechanical precision seen in Linear or Raycast.
 
-Claude normally runs these for you. Use them directly if you want manual control.
+The skill will deduce 3–4 distinct structural directions, enter the skeleton stage, and assemble interactive HTML review pages at each round for visual comparison and diagnosis.
+
+## Scripts (Advanced / Manual Debugging)
+
+> **Note**: In normal use, the AI orchestrates these scripts automatically. Regular users **do not need to run these commands manually**. They are documented here for debugging, offline generation, or workflow integration.
 
 ### Generate images
 
