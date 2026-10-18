@@ -61,31 +61,46 @@ Instruct the AI in physical terms (e.g., *"The lower half feels too bottom-heavy
 
 ## Quick Start
 
-### 1. Setup & Configuration (~1 minute)
+### 1. Setup (~2 minutes)
+
+**Step 1: Download into the skills directory**
 
 ```bash
-# Clone to Claude's skills directory (gh is recommended for private repos)
-gh repo clone LillyLiuJun/modern-logo-design ~/.claude/skills/modern-logo-design
+git clone https://github.com/LillyLiuJun/modern-logo-design.git ~/.claude/skills/modern-logo-design
+```
 
-# Install dependencies and initialize config
+**Step 2: Install dependencies and create the config file**
+
+```bash
 cd ~/.claude/skills/modern-logo-design
 pip install -r requirements.txt
 cp .env.example .env
 ```
 
-Edit `.env`: set `IMAGE_PROVIDER` to your default model (`gemini` / `openai` / `doubao`), then supply that provider's key (supports custom relay endpoints):
+**Step 3: Open `.env`, pick one image provider, and fill in only its key**
 
-| Provider | `IMAGE_PROVIDER` | Required Key | Optional Settings (Relay / Custom Model) |
-|---|---|---|---|
-| Gemini (Nano Banana) | `gemini` | `GEMINI_API_KEY` | `GEMINI_API_BASE_URL`, `GEMINI_MODEL` |
-| ChatGPT (OpenAI) | `openai` | `OPENAI_API_KEY` | `OPENAI_API_BASE_URL`, `OPENAI_MODEL` |
-| Doubao (Seedream) | `doubao` | `DOUBAO_API_KEY` | `DOUBAO_API_BASE_URL`, `DOUBAO_MODEL` |
+| To use | Set `IMAGE_PROVIDER` to | Then fill in |
+|---|---|---|
+| Gemini (Nano Banana) | `gemini` | `GEMINI_API_KEY` |
+| ChatGPT (OpenAI) | `openai` | `OPENAI_API_KEY` |
+| Doubao (Seedream) | `doubao` | `DOUBAO_API_KEY` |
 
-Verify the setup (validates the key online without generating images or consuming quota):
+For example, with Gemini:
+
+```ini
+IMAGE_PROVIDER=gemini
+GEMINI_API_KEY=your key
+```
+
+Leave the other fields alone. Only fill in `*_API_BASE_URL` if you use a third-party relay.
+
+**Check it (optional)**
+
 ```bash
 python scripts/check_env.py
 ```
-When you see "environment ready", you're all set.
+
+When you see "environment ready", you're set. You can skip this step: the skill checks automatically before the first image generation and tells you what's missing.
 
 ### 2. Start Designing
 
@@ -133,6 +148,10 @@ modern-logo-design/
         ├── openai_images.py
         └── doubao.py
 ```
+
+## Contributing
+
+Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 

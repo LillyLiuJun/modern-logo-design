@@ -61,31 +61,46 @@ Logo 不是画作或装饰贴纸，而是一种拥有固有结构与数学规律
 
 ## 快速开始
 
-### 1. 安装与配置（约 1 分钟）
+### 1. 安装与配置（约 2 分钟）
+
+**第 1 步：下载到 skills 目录**
 
 ```bash
-# 获取代码至 Claude skills 目录（私有仓库推荐 gh，也可直接 git clone）
-gh repo clone LillyLiuJun/modern-logo-design ~/.claude/skills/modern-logo-design
+git clone https://github.com/LillyLiuJun/modern-logo-design.git ~/.claude/skills/modern-logo-design
+```
 
-# 安装依赖并生成配置文件
+**第 2 步：安装依赖，生成配置文件**
+
+```bash
 cd ~/.claude/skills/modern-logo-design
 pip install -r requirements.txt
 cp .env.example .env
 ```
 
-编辑 `.env`：先用 `IMAGE_PROVIDER` 选默认模型（`gemini` / `openai` / `doubao`），填那一家的 Key（支持第三方中转地址）：
+**第 3 步：打开 `.env`，选一家图像模型，只填它的 Key**
 
-| 模型 | `IMAGE_PROVIDER` | 必填 Key | 可选参数（中转 / 自定义模型） |
-|---|---|---|---|
-| Gemini（Nano Banana） | `gemini` | `GEMINI_API_KEY` | `GEMINI_API_BASE_URL`、`GEMINI_MODEL` |
-| ChatGPT（OpenAI） | `openai` | `OPENAI_API_KEY` | `OPENAI_API_BASE_URL`、`OPENAI_MODEL` |
-| 豆包（Seedream） | `doubao` | `DOUBAO_API_KEY` | `DOUBAO_API_BASE_URL`、`DOUBAO_MODEL` |
+| 想用 | `IMAGE_PROVIDER` 填 | 再填这一项 |
+|---|---|---|
+| Gemini（Nano Banana） | `gemini` | `GEMINI_API_KEY` |
+| ChatGPT（OpenAI） | `openai` | `OPENAI_API_KEY` |
+| 豆包（Seedream） | `doubao` | `DOUBAO_API_KEY` |
 
-验证配置（仅在线验 Key，不出图、不花额度）：
+例如用 Gemini：
+
+```ini
+IMAGE_PROVIDER=gemini
+GEMINI_API_KEY=你的 key
+```
+
+其余字段不用动。用第三方中转时，才需要另外填 `*_API_BASE_URL`。
+
+**检查一下（可选）**
+
 ```bash
 python scripts/check_env.py
 ```
-看到「环境就绪」即可。
+
+看到「环境就绪」就可以了。这一步可以跳过：skill 第一次出图前会自动检查，缺什么会直接告诉你。
 
 ### 2. 开始使用
 
@@ -133,6 +148,10 @@ modern-logo-design/
         ├── openai_images.py
         └── doubao.py
 ```
+
+## 参与贡献
+
+欢迎提 issue 和 Pull Request，详见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ## 开源协议
 
