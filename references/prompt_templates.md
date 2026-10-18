@@ -13,7 +13,7 @@
 - **避免会触发插画风格的词**：botanical、delicate、organic lines、anatomical、realistic、detailed。
 - **不要写 bold / thick / heavy，也不要写 thin / slender / hairline**，它们会把结果推向钟摆的一端。用 `balanced medium stroke weight`。
 - **一次只描述一个结构**。互相冲突的要求（又要闭合又要开口）会让模型乱画。
-- **骨架阶段不出现任何颜色名**，只用「近黑 + 纯白/米白」。
+- **骨架阶段不出现任何颜色名**，只用「近黑 + 纯白/米白」。用户前期给了颜色时，可以把下面模板里的 `#1A1A1A` 和 `#F7F7F5` 换成用户的色值；效果不好就改回默认。
 
 ---
 

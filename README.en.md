@@ -94,13 +94,18 @@ In your Claude Code / Agent conversation, you can start with a simple sentence (
 
 **Or provide key background context upfront for the most accurate and unique directions:**
 
-> **Full Prompt Example:**
-> 
-> Design a logo for "ReflectFlow":
-> 1. **Product & Context**: An asynchronous deep-work log tool for remote developers, frequently living in macOS menu bars and web workspaces.
-> 2. **Core Vibe**: Calm, rational, structured, focused (strictly avoid clichés like checkmarks, gears, brain maps, or chat bubbles).
-> 3. **Mark Type Preference**: Abstract geometric symbol or a modular variation of initial "R", featuring disciplined negative space or continuous curvature tension.
-> 4. **Visual References**: Lean towards the OS-grade restraint and mechanical precision seen in Linear or Raycast.
+> **Full Prompt Example (Poplex):**
+>
+> Design a logo for "Poplex":
+> 1. **Name**: Poplex (capital P).
+> 2. **Category & Context**: An iOS English-learning app for adults who want to use English in daily life. Positioning: *build language from your life*. It turns what you come across in your day into your own English, and is opened every day.
+> 3. **What to convey**: Growth, accumulation, quiet restraint, a bookish editorial feel. Avoid the usual learning-app clichés: checkmarks, speech bubbles, A–Z letters, globes, light bulbs.
+> 4. **Mark type**: Pure symbol. I'd like to see this kind of "growth" imagery first, using elements made from the letter P and a sprout.
+> 5. **Existing material (optional)**: A few app screenshots and the current P + ink-dot mark, as tonal reference rather than something to copy.
+>
+> Color is optional. If you give brand colors upfront (e.g. warm paper `#FBF8F5`, brand orange `#FF7622`, ink `#2A2320`), they are used when generating. If color gets in the way of judging the shape, switch back to monochrome, or keep refining color in stage 4.
+
+These five points map one-to-one onto the skill's "Stage 1: Brief", so writing them all upfront avoids follow-up questions. For anything you haven't decided, just write "unsure, you recommend".
 
 The skill will deduce 3–4 distinct structural directions, enter the skeleton stage, and assemble interactive HTML review pages at each round for visual comparison and diagnosis.
 
