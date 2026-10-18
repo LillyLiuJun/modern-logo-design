@@ -89,18 +89,18 @@ When you see "environment ready", you're all set.
 
 ### 2. Start Designing
 
-In your Claude Code / Agent conversation, just say it, with the background written out in one go (the more specific, the more focused and less generic the directions):
+In your Agent conversation, just say it, with the background written out in one go (the more specific, the more focused and less generic the directions):
 
-> **Full Prompt Example (Poplex):**
->
+**Full Prompt Example (Poplex):**
+
 > Design a logo for "Poplex":
-> 1. **Name**: Poplex (capital P).
-> 2. **Category & Context**: An iOS English-learning app for adults who want to use English in daily life. Positioning: *build language from your life*. It turns what you come across in your day into your own English, and is opened every day.
-> 3. **What to convey**: Growth, accumulation, quiet restraint, a bookish editorial feel. Avoid the usual learning-app clichés: checkmarks, speech bubbles, A–Z letters, globes, light bulbs.
-> 4. **Mark type**: Pure symbol. I'd like to see this kind of "growth" imagery first, using elements made from the letter P and a sprout.
-> 5. **Existing material (optional)**: A few app screenshots and the current P + ink-dot mark, as tonal reference rather than something to copy.
->
-> Color is optional. If you give brand colors upfront (e.g. warm paper `#FBF8F5`, brand orange `#FF7622`, ink `#2A2320`), they are used when generating. If color gets in the way of judging the shape, switch back to monochrome, or keep refining color in stage 4.
+> 
+> - **Name**: Poplex (capital P).
+> - **Category & Context**: An iOS English-learning app for adults who want to use English in daily life. Positioning: *build language from your life*. It turns what you come across in your day into your own English, and is opened every day.
+> - **What to convey**: Growth, accumulation, quiet restraint, a bookish editorial feel. Avoid the usual learning-app clichés: checkmarks, speech bubbles, A–Z letters, globes, light bulbs.
+> - **Mark type**: Pure symbol. I'd like to see this kind of "growth" imagery first, using elements made from the letter P and a sprout.
+> - **Existing material (optional)**: A few app screenshots and the current P + ink-dot mark, as tonal reference rather than something to copy.
+> - **Regarding color**: Color is optional. If you give brand colors upfront (e.g. warm paper `#FBF8F5`, brand orange `#FF7622`, ink `#2A2320`), they are used when generating. If color gets in the way of judging the shape, switch back to monochrome, or keep refining color in stage 4.
 
 These five points map one-to-one onto the skill's "Stage 1: Brief", so writing them all upfront avoids follow-up questions. For anything you haven't decided, just write "unsure, you recommend".
 
