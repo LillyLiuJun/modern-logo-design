@@ -35,131 +35,66 @@ Stage 4    Color & deliver    Color diagnosis → role assignment → A/B/C sche
 
 Three image providers are supported: **Gemini (Nano Banana)**, **ChatGPT (OpenAI image models)**, and **Doubao (Volcengine Ark Seedream)**.
 
-> 💡 **Usage Note**:
-> - **Prompt Generation**: We recommend using Gemini models for the conversational Agent, as its prompts tend to offer richer spatial and conceptual imagination.
+> 💡 **Model Note (Personal Preference)**:
+> - **Prompt Generation**: In our personal experience, we find Gemini models often generate prompts with richer spatial and conceptual imagination.
 > - **Image Generation**: Supports Gemini, ChatGPT, Doubao, and other compatible models (simply select the corresponding provider in your setup).
 
-> The skill itself talks to you in Chinese. Prompts are stored in both Chinese and English.
+## How to Converge on Your Desired Mark (Iteration Techniques)
 
-## Quick start
+Great logos are rarely hit in a single lottery roll. They are the result of disciplined, stepwise convergence: "derive skeleton → diagnose defects → control-variable micro-tweaks". If initial candidates fall short of your vision, we recommend two practical methods:
 
-1. Install and configure the API as described below (about 2 minutes).
-2. Open Claude Code and say:
+### Method 1: Screenshot Reference Logos & Specify Exactly What You Approve
+Provide 1–2 screenshots of existing logos that embody the vibe you want. **Avoid simply saying "make it like this"**. Instead, explicitly break down which specific elements you approve:
+- "I like how these two strokes interlock to create airy negative space."
+- "I like the taut, upright curvature of this outer squircle corner."
+- "I appreciate the generous whitespace-to-mark ratio."
+Tell the AI: *"Extract this geometric momentum and structural relationship from the reference, but do not copy the literal graphics."* Let AI leverage mature structural geometry rather than superficial mimicry.
 
-   > Design a logo for "XX"
+### Method 2: Use "Physical Adjectives" Instead of Vague Taste Words
+When evaluating drafts, avoid subjective, high-dimensional words like "not premium enough", "lacks vibe", or "looks dated"—AI cannot tune concrete geometric parameters from taste words.
+Consult `references/skeleton_axioms.md` to translate your feeling into observable, physical dimensions:
+- **Tight vs. Loose**: Is the internal counter or negative-space slit too cramped or too dispersed?
+- **Thick vs. Thin**: Is the primary stroke too skeletal (hairline fragility) or too bulky (clunky blockiness)?
+- **Heavy vs. Light**: Is the visual center of gravity floating too high, or sinking too low?
+- **Sharp vs. Soft**: Are the vertices abrupt mechanical right-angles (needing G² squircle continuity), or slack like casual hand-drawings (needing arc tension)?
+Instruct the AI in physical terms (e.g., *"The lower half feels too bottom-heavy; widen the clearance by 15% and apply micro-radiuses to all vertices"*). By adjusting only one variable per round, you will quickly converge within 2–3 iterations.
 
-3. Once you see the "environment ready" message, the skill walks you through the rest.
+## Quick Start
 
-## Install
-
-**1. Get the code**
-
-Put it in Claude's skills directory (`~/.claude/skills/` on macOS / Linux, `%USERPROFILE%\.claude\skills\` on Windows).
-
-The repository is private, so you must be signed in to GitHub first. Using `gh` is the easiest way:
+### 1. Setup & Configuration (~1 minute)
 
 ```bash
-gh auth login        # skip if already signed in
+# Clone to Claude's skills directory (gh is recommended for private repos)
 gh repo clone LillyLiuJun/modern-logo-design ~/.claude/skills/modern-logo-design
-```
 
-Or with plain git (requires access to the repository):
-
-```bash
-git clone https://github.com/LillyLiuJun/modern-logo-design.git ~/.claude/skills/modern-logo-design
-```
-
-**2. Install dependencies and create the config file**
-
-```bash
+# Install dependencies and initialize config
 cd ~/.claude/skills/modern-logo-design
 pip install -r requirements.txt
 cp .env.example .env
 ```
 
-**3. Fill in the API settings and verify** (next section)
+Edit `.env`: set `IMAGE_PROVIDER` to your default model (`gemini` / `openai` / `doubao`), then supply that provider's key (supports custom relay endpoints):
 
-## Configure the API
+| Provider | `IMAGE_PROVIDER` | Required Key | Optional Settings (Relay / Custom Model) |
+|---|---|---|---|
+| Gemini (Nano Banana) | `gemini` | `GEMINI_API_KEY` | `GEMINI_API_BASE_URL`, `GEMINI_MODEL` |
+| ChatGPT (OpenAI) | `openai` | `OPENAI_API_KEY` | `OPENAI_API_BASE_URL`, `OPENAI_MODEL` |
+| Doubao (Seedream) | `doubao` | `DOUBAO_API_KEY` | `DOUBAO_API_BASE_URL`, `DOUBAO_MODEL` |
 
-Edit `.env`: choose the default provider with `IMAGE_PROVIDER`, then fill in only that provider's settings.
-
-| Provider | `IMAGE_PROVIDER` | Required | Optional | Default model |
-|---|---|---|---|---|
-| Gemini (Nano Banana) | `gemini` | `GEMINI_API_KEY` | `GEMINI_API_BASE_URL`, `GEMINI_MODEL` | `gemini-3.1-flash-image-preview` |
-| ChatGPT (OpenAI) | `openai` | `OPENAI_API_KEY` | `OPENAI_API_BASE_URL`, `OPENAI_MODEL` | `gpt-image-2` |
-| Doubao (Seedream) | `doubao` | `DOUBAO_API_KEY` | `DOUBAO_API_BASE_URL`, `DOUBAO_MODEL` | `doubao-seedream-4-0-250828` |
-
-Minimal example (Gemini):
-
-```ini
-IMAGE_PROVIDER=gemini
-GEMINI_API_KEY=your_api_key_here
-```
-
-**Third-party relay**: set `*_API_BASE_URL` to the address your provider gives you. OpenAI relays usually end with `/v1`, Doubao relays with `/api/v3`; follow your provider's docs for Gemini. Leave it empty to use the official endpoint.
-
-**Doubao note**: enable a Seedream model in the Volcengine Ark console and create a key under "API Key Management". Set `DOUBAO_MODEL` to a model ID you have enabled; newer versions (4.5, 5.0, …) are listed in the console.
-
-**Other settings**: `LOGO_OUTPUT_DIR` sets where images are saved (default: `output/` inside the skill folder).
-
-`.env` and `output/` are listed in `.gitignore` and will not be committed.
-
-### Verify the setup
-
+Verify the setup (validates the key online without generating images or consuming quota):
 ```bash
-python scripts/check_env.py           # check the selected provider and validate the key online (no image generated, no image quota used)
-python scripts/check_env.py --all     # show the status of all three providers
+python scripts/check_env.py
 ```
+When you see "environment ready", you're all set.
 
-When you see the "environment ready" message you're good to go. Doubao has no key-validation endpoint that avoids generating an image, so its key is only validated on the first generation.
+### 2. Start Designing
+
+In your Claude Code / Agent conversation, simply say:
+> Design a logo for "[Product Name]"
+
+The skill will guide you through the 5-stage workflow, generating interactive HTML review pages at each round for visual comparison and diagnosis.
 
 ## Scripts
-
-Claude normally runs these for you. Use them directly if you want manual control.
-
-### Generate images
-
-```bash
-# Skeleton stage: text-only prompts
-python scripts/generate_image.py --name A1 --prompt-file A1.en.txt --prompt-zh-file A1.zh.txt
-
-# Color stage: pass the confirmed skeleton to lock the shape
-python scripts/generate_image.py --name A1-color --stage color --ref output/A1.png --prompt-file c.en.txt
-
-# Switch provider for one run
-python scripts/generate_image.py --provider doubao --name A1 --prompt "..."
-
-# Inspect the request without calling the API
-python scripts/generate_image.py --dry-run --prompt "..."
-```
-
-Each image gets a sibling `.json` recording the Chinese and English prompts, the model, and any reference images.
-
-### Other tools (none call an API)
-
-```bash
-# Review page: images + design rationale + Chinese/English prompts (only assembles the page)
-python scripts/build_review.py --names A1 B1 C1 --title "Name · Skeleton round 1" --out output/round1.html
-
-# SVG: render and compare with the source image / recolor by layer
-python scripts/render_svg.py output/A3.svg --source output/A3.png --name A3-svg
-python scripts/render_svg.py output/A3.svg --name A3-c1 --colors "skeleton=#17120C,focus=#FF7622,bg=#FAF7F2"
-
-# Color diagnosis: lightness, chroma, warmth, pairwise contrast, gradient suitability
-python scripts/color_check.py "#211811" "#FFF5EF" "#FF7622"
-
-# App-icon preview: light / dark backgrounds at 180 / 64 / 32 / 16 px
-python scripts/make_preview.py output/A1.png
-```
-
-## Troubleshooting
-
-| Symptom | What to do |
-|---|---|
-| `check_env.py` reports an invalid key | Make sure the key belongs to the provider selected by `IMAGE_PROVIDER`, and that `.env` sits in the skill's root folder |
-| 404 with a relay address | Check the URL suffix: `/v1` for OpenAI, `/api/v3` for Doubao |
-| Doubao says the model isn't enabled | Enable it in the Ark console and set `DOUBAO_MODEL` to an enabled ID |
-| Clone fails with a permission error | The repo is private: run `gh auth login` and make sure your account has access |
 
 ## Layout
 

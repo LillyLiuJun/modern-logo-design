@@ -35,131 +35,66 @@ Logo 不是画作或装饰贴纸，而是一种拥有固有结构与数学规律
 
 出图支持三家图像模型：**Gemini（Nano Banana）**、**ChatGPT（OpenAI 图像模型）**、**豆包（火山方舟 Seedream）**。
 
-> 💡 **使用建议**：
-> - **提示词推导**：建议使用 Gemini 系列模型作为对话 Agent，其生成的提示词在空间与意象表达上通常更有想象力。
+> 💡 **模型建议（个人使用偏好）**：
+> - **提示词推导**：个人更倾向推荐使用 Gemini 系列模型作为对话 Agent，个人体验上其生成的提示词在空间与意象表达上通常更有想象力。
 > - **下游出图**：支持 Gemini、ChatGPT、豆包等图像模型（配置时选择对应的接口类型即可）。
+
+## 如何逼近你想要的感觉（迭代技巧）
+
+好 Logo 几乎不可能一轮生成抽中，它是一个「推导骨架 → 诊断问题 → 控制变量微调」逐步收敛的过程。如果生成的方案离预期有差距，推荐使用以下两种方法：
+
+### 方法一：截屏参考 Logo，明确指出你认可的具体细节
+发 1~2 张你觉得调性对的现有 Logo 截图给 AI。**切忌只说“参考这个”**，而是明确拆解出你认可的具体元素：
+- “我认可它两根线条咬合形成的通透感”
+- “我喜欢它这个外圈超椭圆转角的挺拔曲率”
+- “我认可它整体的大留白比例，不要太满”
+告诉 AI：“请提取参考图中的这一几何动势，但不要照搬其具体图案。”让 AI 借力成熟标志的形式结构，而不是表面临摹。
+
+### 方法二：用「低维物理语言」描述想法，避免抽象品味词
+当对结果不满意时，尽量避免使用“不够高级”、“差点意思”、“太土”等模糊高维词（AI 无法据此精准修改参数）。
+参考 `references/skeleton_axioms.md`（骨架公理），把感受拆解为可感知的物理维度：
+- **松 / 紧**：内部字怀或切缝是太挤还是太散？
+- **粗 / 细**：主干线宽是显得单薄（发丝线），还是笨重（色块堆积）？
+- **轻 / 重**：视觉重心是偏高显得飘，还是偏低显得沉？
+- **硬 / 软**：转角是机械死直角（需要 G² 连续曲率平滑），还是像随手画的一样泄气（需要增加张力）？
+直接用物理语言提要求（如：“下半部分太沉，请将底部间距拉大 15%；转角过硬，请做微倒角处理”）。每次只调整一个变量，通常 2~3 轮即可精准收敛。
 
 ## 快速开始
 
-1. 按下面的步骤安装并配置 API（约 2 分钟）。
-2. 打开 Claude Code，直接说：
-
-   > 帮我给「XX」设计一个 logo
-
-3. 看到「环境就绪」后，skill 会引导你走完整个流程。
-
-## 安装
-
-**1. 获取代码**
-
-放到 Claude 的 skills 目录（macOS / Linux 为 `~/.claude/skills/`，Windows 为 `%USERPROFILE%\.claude\skills\`）。
-
-仓库是私有的，克隆前需要已登录 GitHub。推荐用 `gh`：
+### 1. 安装与配置（约 1 分钟）
 
 ```bash
-gh auth login        # 已登录可跳过
+# 获取代码至 Claude skills 目录（私有仓库推荐 gh，也可直接 git clone）
 gh repo clone LillyLiuJun/modern-logo-design ~/.claude/skills/modern-logo-design
-```
 
-或者直接用 git（需要有该仓库的访问权限）：
-
-```bash
-git clone https://github.com/LillyLiuJun/modern-logo-design.git ~/.claude/skills/modern-logo-design
-```
-
-**2. 安装依赖，生成配置文件**
-
-```bash
+# 安装依赖并生成配置文件
 cd ~/.claude/skills/modern-logo-design
 pip install -r requirements.txt
 cp .env.example .env
 ```
 
-**3. 填写 API，检查配置**（见下一节）
+编辑 `.env`：先用 `IMAGE_PROVIDER` 选默认模型（`gemini` / `openai` / `doubao`），填那一家的 Key（支持第三方中转地址）：
 
-## 配置 API
+| 模型 | `IMAGE_PROVIDER` | 必填 Key | 可选参数（中转 / 自定义模型） |
+|---|---|---|---|
+| Gemini（Nano Banana） | `gemini` | `GEMINI_API_KEY` | `GEMINI_API_BASE_URL`、`GEMINI_MODEL` |
+| ChatGPT（OpenAI） | `openai` | `OPENAI_API_KEY` | `OPENAI_API_BASE_URL`、`OPENAI_MODEL` |
+| 豆包（Seedream） | `doubao` | `DOUBAO_API_KEY` | `DOUBAO_API_BASE_URL`、`DOUBAO_MODEL` |
 
-编辑 `.env`：先用 `IMAGE_PROVIDER` 选默认模型，再只填那一家的配置。
-
-| 模型 | `IMAGE_PROVIDER` | 必填 | 可选 | 默认模型 |
-|---|---|---|---|---|
-| Gemini（Nano Banana） | `gemini` | `GEMINI_API_KEY` | `GEMINI_API_BASE_URL`、`GEMINI_MODEL` | `gemini-3.1-flash-image-preview` |
-| ChatGPT（OpenAI） | `openai` | `OPENAI_API_KEY` | `OPENAI_API_BASE_URL`、`OPENAI_MODEL` | `gpt-image-2` |
-| 豆包（Seedream） | `doubao` | `DOUBAO_API_KEY` | `DOUBAO_API_BASE_URL`、`DOUBAO_MODEL` | `doubao-seedream-4-0-250828` |
-
-最小示例（以 Gemini 为例）：
-
-```ini
-IMAGE_PROVIDER=gemini
-GEMINI_API_KEY=your_api_key_here
-```
-
-**用第三方中转**：把 `*_API_BASE_URL` 填成服务商给的地址。OpenAI 中转一般以 `/v1` 结尾，豆包中转一般以 `/api/v3` 结尾，Gemini 中转按服务商说明填写。留空则使用官方地址。
-
-**豆包注意**：先在火山方舟控制台开通 Seedream 模型，并在「API Key 管理」创建 key。`DOUBAO_MODEL` 填你已开通的模型 ID，更新版本（4.5、5.0 等）以控制台显示为准。
-
-**其他字段**：`LOGO_OUTPUT_DIR` 设置图片保存目录，默认是 skill 目录下的 `output/`。
-
-`.env` 与 `output/` 已写进 `.gitignore`，不会被提交。
-
-### 检查配置
-
+验证配置（仅在线验 Key，不出图、不花额度）：
 ```bash
-python scripts/check_env.py           # 检查当前选择的模型，并在线验证 key（不出图、不花生图额度）
-python scripts/check_env.py --all     # 查看三家的配置状态
+python scripts/check_env.py
 ```
+看到「环境就绪」即可。
 
-看到「环境就绪」就可以用了。豆包没有不出图的验证接口，第一次出图时才会验证 key。
+### 2. 开始使用
+
+在 Claude Code / Agent 终端中，直接说：
+> 帮我给「XX 产品」设计一个 logo
+
+Skill 会自动进入 5 阶段工作流，并在每轮生成本地可交互的 HTML 对照页供你挑选与诊断。
 
 ## 脚本用法
-
-平时由 Claude 自动调用，需要手动操作时可参考下面的命令。
-
-### 出图
-
-```bash
-# 骨架阶段：只用文字出图
-python scripts/generate_image.py --name A1 --prompt-file A1.en.txt --prompt-zh-file A1.zh.txt
-
-# 上色阶段：传入已确认的骨架图，锁定形状
-python scripts/generate_image.py --name A1-color --stage color --ref output/A1.png --prompt-file c.en.txt
-
-# 临时换一家模型
-python scripts/generate_image.py --provider doubao --name A1 --prompt "..."
-
-# 只看请求内容，不调用 API
-python scripts/generate_image.py --dry-run --prompt "..."
-```
-
-每张图旁边会生成同名 `.json`，记录中英文提示词、模型和参考图。
-
-### 其他工具（均不调用 API）
-
-```bash
-# 对照页：图 + 设计阐述 + 中英文提示词（build_review.py 只拼页面，不出图）
-python scripts/build_review.py --names A1 B1 C1 --title "名称 · 骨架第 1 轮" --out output/round1.html
-
-# SVG：渲染并与原图对比 / 按图层精确上色
-python scripts/render_svg.py output/A3.svg --source output/A3.png --name A3-svg
-python scripts/render_svg.py output/A3.svg --name A3-c1 --colors "skeleton=#17120C,focus=#FF7622,bg=#FAF7F2"
-
-# 色彩诊断：明度、彩度、冷暖、两两对比度、能否做渐变
-python scripts/color_check.py "#211811" "#FFF5EF" "#FF7622"
-
-# App 图标预览：浅色 / 深色背景，180 / 64 / 32 / 16px
-python scripts/make_preview.py output/A1.png
-```
-
-## 常见问题
-
-| 现象 | 处理 |
-|---|---|
-| `check_env.py` 提示 key 无效 | 确认填的是所选 `IMAGE_PROVIDER` 对应那一家的 key，且 `.env` 在 skill 根目录 |
-| 用中转地址报 404 | 检查地址后缀：OpenAI 要 `/v1`，豆包要 `/api/v3` |
-| 豆包报模型未开通 | 到火山方舟控制台开通模型，并把 `DOUBAO_MODEL` 改成已开通的 ID |
-| 克隆提示无权限 | 仓库是私有的，先执行 `gh auth login`，并确认账号有访问权限 |
-
-## 目录
 
 ```
 modern-logo-design/
