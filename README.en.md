@@ -36,7 +36,7 @@ Stage 4    Color & deliver    Color diagnosis → role assignment → A/B/C sche
 Three image providers are supported: **Gemini (Nano Banana)**, **ChatGPT (OpenAI image models)**, and **Doubao (Volcengine Ark Seedream)**.
 
 > 💡 **Model Note (Personal Preference)**:
-> - **Prompt Generation**: In our personal experience, we find Gemini models often generate prompts with richer spatial and conceptual imagination.
+> - **Prompt Generation**: If you are hesitating between Claude and Gemini, we personally lean toward recommending Gemini models as the conversational Agent; to some degree, its prompts tend to offer richer spatial and conceptual imagination.
 > - **Image Generation**: Supports Gemini, ChatGPT, Doubao, and other compatible models (simply select the corresponding provider in your setup).
 
 ## How to Converge on Your Desired Mark (Iteration Techniques)
@@ -57,7 +57,7 @@ Consult `references/skeleton_axioms.md` to translate your feeling into observabl
 - **Thick vs. Thin**: Is the primary stroke too skeletal (hairline fragility) or too bulky (clunky blockiness)?
 - **Heavy vs. Light**: Is the visual center of gravity floating too high, or sinking too low?
 - **Sharp vs. Soft**: Are the vertices abrupt mechanical right-angles (needing G² squircle continuity), or slack like casual hand-drawings (needing arc tension)?
-Instruct the AI in physical terms (e.g., *"The lower half feels too bottom-heavy; widen the clearance by 15% and apply micro-radiuses to all vertices"*). By adjusting only one variable per round, you will quickly converge within 2–3 iterations.
+Instruct the AI in physical terms (e.g., *"The lower half feels too bottom-heavy; widen the clearance by 15% and apply micro-radiuses to all vertices"*). When diagnosing problems, **use low-dimensional physical language**; avoid subjective taste words like "looks bad" or "not premium".
 
 ## Quick Start
 
