@@ -89,9 +89,7 @@ When you see "environment ready", you're all set.
 
 ### 2. Start Designing
 
-In your Agent conversation, just say it, with the background written out in one go (the more specific, the more focused and less generic the directions):
-
-**Full Prompt Example (Poplex):**
+In your Agent terminal (taking Poplex as an example):
 
 > Design a logo for "Poplex":
 > 

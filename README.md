@@ -89,9 +89,7 @@ python scripts/check_env.py
 
 ### 2. 开始使用
 
-在 Agent 终端中，直接说，并把背景信息一次写全（越具体，推导出的方向越聚焦、越不容易陷入俗套）：
-
-**完整提示词范例（以 Poplex 为例）：**
+在 Agent 终端中使用（以 Poplex 为例）：
 
 > 帮我给「Poplex」设计一个 logo：
 > 
