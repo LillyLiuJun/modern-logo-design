@@ -61,42 +61,25 @@ Instruct the AI in physical terms (e.g., *"The lower half feels too bottom-heavy
 
 ## Quick Start
 
-### 1. Setup (~2 minutes)
+### 1. Install
 
-**Step 1: Download into the skills directory**
+Paste this to Claude Code (or any agent that supports skills):
+
+> Install the skill from https://github.com/LillyLiuJun/modern-logo-design into ~/.claude/skills/modern-logo-design, install its dependencies, and create the .env file from .env.example. Then tell me which file to open and which key to fill in. Do not ask me to paste my key in the chat.
+
+Then open `.env`, set `IMAGE_PROVIDER` (`gemini`, `openai` or `doubao`) and fill in that provider's key (`GEMINI_API_KEY`, `OPENAI_API_KEY` or `DOUBAO_API_KEY`). Leave the other fields alone; only fill in `*_API_BASE_URL` if you use a third-party relay.
+
+<details>
+<summary>Manually install</summary>
 
 ```bash
 git clone https://github.com/LillyLiuJun/modern-logo-design.git ~/.claude/skills/modern-logo-design
-```
-
-**Step 2: Install dependencies and create the config file**
-
-```bash
 cd ~/.claude/skills/modern-logo-design
 pip install -r requirements.txt
 cp .env.example .env
 ```
 
-**Step 3: Open `.env`, pick one image provider, and fill in only its key**
-
-`IMAGE_PROVIDER` can be `gemini`, `openai` (ChatGPT) or `doubao`; the matching keys are `GEMINI_API_KEY`, `OPENAI_API_KEY` and `DOUBAO_API_KEY`.
-
-For example, with Gemini:
-
-```ini
-IMAGE_PROVIDER=gemini
-GEMINI_API_KEY=your key
-```
-
-Leave the other fields alone. Only fill in `*_API_BASE_URL` if you use a third-party relay.
-
-**Check it (optional)**
-
-```bash
-python scripts/check_env.py
-```
-
-When you see "environment ready", you're set. You can skip this step: the skill checks automatically before the first image generation and tells you what's missing.
+</details>
 
 ### 2. Start Designing
 

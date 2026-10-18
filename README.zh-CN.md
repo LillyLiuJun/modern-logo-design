@@ -61,42 +61,25 @@ Logo 不是画作或装饰贴纸，而是一种拥有固有结构与数学规律
 
 ## 快速开始
 
-### 1. 安装与配置（约 2 分钟）
+### 1. 安装
 
-**第 1 步：下载到 skills 目录**
+把下面这段话发给 Claude Code（或其他支持 skill 的 Agent）：
+
+> 帮我把 https://github.com/LillyLiuJun/modern-logo-design 安装为 skill，放到 ~/.claude/skills/modern-logo-design，装好依赖，并用 .env.example 生成 .env。然后告诉我要打开哪个文件、填哪个 Key。不要让我把 Key 贴到对话里。
+
+然后打开 `.env`，设置 `IMAGE_PROVIDER`（`gemini`、`openai` 或 `doubao`），填对应的 Key（`GEMINI_API_KEY`、`OPENAI_API_KEY` 或 `DOUBAO_API_KEY`）。其余字段不用动，用第三方中转时才需要另外填 `*_API_BASE_URL`。
+
+<details>
+<summary>手动安装</summary>
 
 ```bash
 git clone https://github.com/LillyLiuJun/modern-logo-design.git ~/.claude/skills/modern-logo-design
-```
-
-**第 2 步：安装依赖，生成配置文件**
-
-```bash
 cd ~/.claude/skills/modern-logo-design
 pip install -r requirements.txt
 cp .env.example .env
 ```
 
-**第 3 步：打开 `.env`，选一家图像模型，只填它的 Key**
-
-`IMAGE_PROVIDER` 可选 `gemini`、`openai`（ChatGPT）、`doubao`（豆包），对应的 Key 是 `GEMINI_API_KEY`、`OPENAI_API_KEY`、`DOUBAO_API_KEY`。
-
-例如用 Gemini：
-
-```ini
-IMAGE_PROVIDER=gemini
-GEMINI_API_KEY=你的 key
-```
-
-其余字段不用动。用第三方中转时，才需要另外填 `*_API_BASE_URL`。
-
-**检查一下（可选）**
-
-```bash
-python scripts/check_env.py
-```
-
-看到「环境就绪」就可以了。这一步可以跳过：skill 第一次出图前会自动检查，缺什么会直接告诉你。
+</details>
 
 ### 2. 开始使用
 
