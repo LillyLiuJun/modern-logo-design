@@ -104,45 +104,6 @@ python scripts/check_env.py
 
 Skill 收到后会自动推导 3–4 个截然不同的结构方向，进入骨架出图，并在每轮生成本地可交互的 HTML 对照页供你挑选与逐轮诊断。
 
-## 脚本用法（进阶 / 手动调试）
-
-> **说明**：日常使用完全由 AI 自动调度，普通用户只需对话即可，**无需手动执行以下命令**。以下命令仅供开发者独立排障、离线出图或单步调试时参考。
-
-### 出图
-
-```bash
-# 骨架阶段：只用文字出图
-python scripts/generate_image.py --name A1 --prompt-file A1.en.txt --prompt-zh-file A1.zh.txt
-
-# 上色阶段：传入已确认的骨架图，锁定形状
-python scripts/generate_image.py --name A1-color --stage color --ref output/A1.png --prompt-file c.en.txt
-
-# 临时换一家模型
-python scripts/generate_image.py --provider doubao --name A1 --prompt "..."
-
-# 只看请求内容，不调用 API
-python scripts/generate_image.py --dry-run --prompt "..."
-```
-
-每张图旁边会生成同名 `.json`，记录中英文提示词、模型和参考图。
-
-### 其他工具（均不调用 API）
-
-```bash
-# 对照页：图 + 设计阐述 + 中英文提示词（build_review.py 只拼页面，不出图）
-python scripts/build_review.py --names A1 B1 C1 --title "名称 · 骨架第 1 轮" --out output/round1.html
-
-# SVG：渲染并与原图对比 / 按图层精确上色
-python scripts/render_svg.py output/A3.svg --source output/A3.png --name A3-svg
-python scripts/render_svg.py output/A3.svg --name A3-c1 --colors "skeleton=#17120C,focus=#FF7622,bg=#FAF7F2"
-
-# 色彩诊断：明度、彩度、冷暖、两两对比度、能否做渐变
-python scripts/color_check.py "#211811" "#FFF5EF" "#FF7622"
-
-# App 图标预览：浅色 / 深色背景，180 / 64 / 32 / 16px
-python scripts/make_preview.py output/A1.png
-```
-
 ## 目录
 
 ```

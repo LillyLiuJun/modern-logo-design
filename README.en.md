@@ -104,45 +104,6 @@ These five points map one-to-one onto the skill's "Stage 1: Brief", so writing t
 
 The skill will deduce 3–4 distinct structural directions, enter the skeleton stage, and assemble interactive HTML review pages at each round for visual comparison and diagnosis.
 
-## Scripts (Advanced / Manual Debugging)
-
-> **Note**: In normal use, the AI orchestrates these scripts automatically. Regular users **do not need to run these commands manually**. They are documented here for debugging, offline generation, or workflow integration.
-
-### Generate images
-
-```bash
-# Skeleton stage: text-only prompts
-python scripts/generate_image.py --name A1 --prompt-file A1.en.txt --prompt-zh-file A1.zh.txt
-
-# Color stage: pass the confirmed skeleton to lock the shape
-python scripts/generate_image.py --name A1-color --stage color --ref output/A1.png --prompt-file c.en.txt
-
-# Switch provider for one run
-python scripts/generate_image.py --provider doubao --name A1 --prompt "..."
-
-# Inspect the request without calling the API
-python scripts/generate_image.py --dry-run --prompt "..."
-```
-
-Each image gets a sibling `.json` recording the Chinese and English prompts, the model, and any reference images.
-
-### Other tools (none call an API)
-
-```bash
-# Review page: images + design rationale + Chinese/English prompts (only assembles the page)
-python scripts/build_review.py --names A1 B1 C1 --title "Name · Skeleton round 1" --out output/round1.html
-
-# SVG: render and compare with the source image / recolor by layer
-python scripts/render_svg.py output/A3.svg --source output/A3.png --name A3-svg
-python scripts/render_svg.py output/A3.svg --name A3-c1 --colors "skeleton=#17120C,focus=#FF7622,bg=#FAF7F2"
-
-# Color diagnosis: lightness, chroma, warmth, pairwise contrast, gradient suitability
-python scripts/color_check.py "#211811" "#FFF5EF" "#FF7622"
-
-# App-icon preview: light / dark backgrounds at 180 / 64 / 32 / 16 px
-python scripts/make_preview.py output/A1.png
-```
-
 ## Layout
 
 ```
