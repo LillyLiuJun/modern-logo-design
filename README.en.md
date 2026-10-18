@@ -139,6 +139,7 @@ python scripts/make_preview.py output/A1.png
 modern-logo-design/
 ├── SKILL.md                    # Workflow (stages 0–4)
 ├── README.md / README.en.md    # Chinese / English docs
+├── LICENSE                     # MIT License
 ├── .env.example                # API config template
 ├── requirements.txt
 ├── assets/
@@ -161,3 +162,8 @@ modern-logo-design/
         ├── openai_images.py
         └── doubao.py
 ```
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+

@@ -139,6 +139,7 @@ python scripts/make_preview.py output/A1.png
 modern-logo-design/
 ├── SKILL.md                    # 流程（阶段 0–4）
 ├── README.md / README.en.md    # 中文 / 英文说明
+├── LICENSE                     # MIT 开源协议
 ├── .env.example                # API 配置模板
 ├── requirements.txt
 ├── assets/
@@ -161,3 +162,8 @@ modern-logo-design/
         ├── openai_images.py
         └── doubao.py
 ```
+
+## 开源协议
+
+本项目基于 [MIT License](LICENSE) 开源。
+
