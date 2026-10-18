@@ -35,9 +35,7 @@ Stage 4    Color & deliver    Color diagnosis → role assignment → A/B/C sche
 
 Three image providers are supported: **Gemini (Nano Banana)**, **ChatGPT (OpenAI image models)**, and **Doubao (Volcengine Ark Seedream)**.
 
-> 💡 **Model Note (Personal Preference)**:
-> - **Prompt Generation**: If you are hesitating between Claude and Gemini, we personally lean toward recommending Gemini models as the conversational Agent; to some degree, its prompts tend to offer richer spatial and conceptual imagination.
-> - **Image Generation**: Supports Gemini, ChatGPT, Doubao, and other compatible models (simply select the corresponding provider in your setup).
+> 💡 **Tip**: as the conversational agent that writes the prompts, we find Gemini a little more imaginative than Claude in spatial and conceptual terms.
 
 ## Quick Start
 
@@ -63,7 +61,7 @@ cp .env.example .env
 
 ### 2. Start Designing
 
-In your Agent terminal (taking Poplex as an example):
+Tell your agent what you are making (example: Poplex):
 
 > Design a logo for "Poplex":
 > 
@@ -72,11 +70,9 @@ In your Agent terminal (taking Poplex as an example):
 > - **What to convey**: Growth, accumulation, quiet restraint, a bookish editorial feel. Avoid the usual learning-app clichés: checkmarks, speech bubbles, A–Z letters, globes, light bulbs.
 > - **Mark type**: Pure symbol. I'd like to see this kind of "growth" imagery first, using elements made from the letter P and a sprout.
 > - **Existing material (optional)**: A few app screenshots and the current P + ink-dot mark, as tonal reference rather than something to copy.
-> - **Regarding color**: Color is optional. If you give brand colors upfront (e.g. warm paper `#FBF8F5`, brand orange `#FF7622`, ink `#2A2320`), they are used when generating. If color gets in the way of judging the shape, switch back to monochrome, or keep refining color in stage 4.
+> - **Color (optional)**: e.g. warm paper `#FBF8F5`, orange `#FF7622`, ink `#2A2320`. Used when generating; if color gets in the way of judging the shape, the skill falls back to monochrome and refines color in stage 4.
 
-These five points map one-to-one onto the skill's "Stage 1: Brief", so writing them all upfront avoids follow-up questions. For anything you haven't decided, just write "unsure, you recommend".
-
-The skill will deduce 3–4 distinct structural directions, enter the skeleton stage, and assemble interactive HTML review pages at each round for visual comparison and diagnosis.
+These map to the skill's Stage 1: Brief. For anything undecided, write "unsure, you recommend". The skill then derives 3–4 distinct directions and builds an HTML review page each round.
 
 ## How to Converge on the Mark You Want
 
