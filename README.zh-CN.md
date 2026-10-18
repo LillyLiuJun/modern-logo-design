@@ -4,10 +4,26 @@
 
 为产品设计现代 logo 的 skill：**先骨架，后颜色**。将感性、发散、具象的品牌需求，翻译为具备包豪斯必然性、现代数学秩序、高阶曲率张力与操作系统级质感的工程级矢量 logo。
 
-<p align="center">
-  <img src="assets/example_svg_s_office.svg" width="240" alt="示例：圆角方块 + 负空间 S">
-</p>
-<p align="center"><sub>示例：圆角方块 + 负空间 S，由 skill 在阶段 3.5 重绘为精确矢量</sub></p>
+<table align="center">
+  <tr>
+    <td align="center" width="25%">
+      <img src="assets/showcase/poplex.png" width="150" alt="Poplex logo：字母 P 与嫩芽"><br>
+      <sub>Poplex<br>字母 + 嫩芽</sub>
+    </td>
+    <td align="center" width="25%">
+      <img src="assets/showcase/s-negative-space.png" width="150" alt="圆角方块里的负空间 S"><br>
+      <sub>圆角方块<br>负空间 S</sub>
+    </td>
+    <td align="center" width="25%">
+      <img src="assets/showcase/tree-light.png" width="150" alt="浅底大树标"><br>
+      <sub>大树标<br>浅底</sub>
+    </td>
+    <td align="center" width="25%">
+      <img src="assets/showcase/tree-reversed.png" width="150" alt="深底反白大树标"><br>
+      <sub>大树标<br>深底反白</sub>
+    </td>
+  </tr>
+</table>
 
 ## 核心价值主张：Logo 的固有法则
 
@@ -101,7 +117,8 @@ modern-logo-design/
 ├── .env.example                # API 配置模板
 ├── requirements.txt
 ├── assets/
-│   └── example_svg_s_office.svg  # SVG 重绘示例
+│   ├── example_svg_s_office.svg  # SVG 重绘示例
+│   └── showcase/                 # README 顶部展示的 logo
 ├── references/
 │   ├── skeleton_axioms.md      # 骨架公理：推导与诊断
 │   ├── svg_redraw.md           # SVG 重绘：约定、步骤、对比、上色

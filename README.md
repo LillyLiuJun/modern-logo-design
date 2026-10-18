@@ -4,10 +4,26 @@
 
 A skill for designing modern product logos: **skeleton first, color later**. Translating fuzzy brand ideas into marks with Bauhaus inevitability, mathematical order, high-order curvature tension, and OS-grade craft.
 
-<p align="center">
-  <img src="assets/example_svg_s_office.svg" width="240" alt="Example: rounded square with a negative-space S">
-</p>
-<p align="center"><sub>Example: rounded square with a negative-space S, redrawn as precise vector in stage 3.5</sub></p>
+<table align="center">
+  <tr>
+    <td align="center" width="25%">
+      <img src="assets/showcase/poplex.png" width="150" alt="Poplex logo: letter P with a sprout"><br>
+      <sub>Poplex<br>letter + sprout</sub>
+    </td>
+    <td align="center" width="25%">
+      <img src="assets/showcase/s-negative-space.png" width="150" alt="Rounded square with a negative-space S"><br>
+      <sub>Rounded square<br>negative-space S</sub>
+    </td>
+    <td align="center" width="25%">
+      <img src="assets/showcase/tree-light.png" width="150" alt="Tree mark on a light base"><br>
+      <sub>Tree mark<br>light</sub>
+    </td>
+    <td align="center" width="25%">
+      <img src="assets/showcase/tree-reversed.png" width="150" alt="Tree mark reversed on a dark base"><br>
+      <sub>Tree mark<br>reversed</sub>
+    </td>
+  </tr>
+</table>
 
 ## Core Value Proposition: The First Principles of Logo Design
 
@@ -101,7 +117,8 @@ modern-logo-design/
 ├── .env.example                # API config template
 ├── requirements.txt
 ├── assets/
-│   └── example_svg_s_office.svg  # SVG redraw example
+│   ├── example_svg_s_office.svg  # SVG redraw example
+│   └── showcase/                 # Logos shown at the top of the README
 ├── references/
 │   ├── skeleton_axioms.md      # Skeleton axioms: derivation and diagnosis
 │   ├── svg_redraw.md           # SVG redraw: conventions, steps, comparison, coloring
