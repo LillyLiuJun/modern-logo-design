@@ -39,26 +39,6 @@ Three image providers are supported: **Gemini (Nano Banana)**, **ChatGPT (OpenAI
 > - **Prompt Generation**: If you are hesitating between Claude and Gemini, we personally lean toward recommending Gemini models as the conversational Agent; to some degree, its prompts tend to offer richer spatial and conceptual imagination.
 > - **Image Generation**: Supports Gemini, ChatGPT, Doubao, and other compatible models (simply select the corresponding provider in your setup).
 
-## How to Converge on Your Desired Mark (Iteration Techniques)
-
-Great logos are rarely hit in a single lottery roll. They are the result of disciplined, stepwise convergence: "derive skeleton → diagnose defects → control-variable micro-tweaks". If initial candidates fall short of your vision, we recommend two practical methods:
-
-### Method 1: Screenshot Reference Logos & Specify Exactly What You Approve
-Provide 1–2 screenshots of existing logos that embody the vibe you want. **Avoid simply saying "make it like this"**. Instead, explicitly break down which specific elements you approve:
-- "I like how these two strokes interlock to create airy negative space."
-- "I like the taut, upright curvature of this outer squircle corner."
-- "I appreciate the generous whitespace-to-mark ratio."
-Tell the AI: *"Extract this geometric momentum and structural relationship from the reference, but do not copy the literal graphics."* Let AI leverage mature structural geometry rather than superficial mimicry.
-
-### Method 2: Use "Physical Adjectives" Instead of Vague Taste Words
-When evaluating drafts, avoid subjective, high-dimensional words like "not premium enough", "lacks vibe", or "looks dated"—AI cannot tune concrete geometric parameters from taste words.
-Consult `references/skeleton_axioms.md` to translate your feeling into observable, physical dimensions:
-- **Tight vs. Loose**: Is the internal counter or negative-space slit too cramped or too dispersed?
-- **Thick vs. Thin**: Is the primary stroke too skeletal (hairline fragility) or too bulky (clunky blockiness)?
-- **Heavy vs. Light**: Is the visual center of gravity floating too high, or sinking too low?
-- **Sharp vs. Soft**: Are the vertices abrupt mechanical right-angles (needing G² squircle continuity), or slack like casual hand-drawings (needing arc tension)?
-Instruct the AI in physical terms (e.g., *"The lower half feels too bottom-heavy; widen the clearance by 15% and apply micro-radiuses to all vertices"*). When diagnosing problems, **use low-dimensional physical language**; avoid subjective taste words like "looks bad" or "not premium".
-
 ## Quick Start
 
 ### 1. Install
@@ -97,6 +77,23 @@ In your Agent terminal (taking Poplex as an example):
 These five points map one-to-one onto the skill's "Stage 1: Brief", so writing them all upfront avoids follow-up questions. For anything you haven't decided, just write "unsure, you recommend".
 
 The skill will deduce 3–4 distinct structural directions, enter the skeleton stage, and assemble interactive HTML review pages at each round for visual comparison and diagnosis.
+
+## How to Converge on the Mark You Want
+
+Great logos are rarely hit in one roll. They converge: derive a skeleton, diagnose it, change one thing. Two techniques help:
+
+**1. Show a reference, and say what you like about it.**
+Share 1–2 screenshots with the right feel, and name the part you approve instead of saying "like this": the interlocking strokes, the taut squircle corner, the generous whitespace. Then ask the AI to borrow the geometry, not copy the graphic.
+
+**2. Describe problems in physical terms, not taste words.**
+"Not premium enough" gives the AI nothing to adjust. Use the dimensions in `references/skeleton_axioms.md`:
+
+- **Tight / loose**: is the counter or slit too cramped or too scattered?
+- **Thick / thin**: are the strokes hairline-fragile or clunky?
+- **Heavy / light**: does the center of gravity sit too high or too low?
+- **Sharp / soft**: are the corners mechanical, or slack?
+
+For example: *"The lower half is bottom-heavy; widen the clearance by 15% and soften the vertices."*
 
 ## Layout
 
