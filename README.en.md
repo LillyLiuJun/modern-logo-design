@@ -1,13 +1,24 @@
-# Modern Logo Methodology
+# Modern Logo Design
 
 [简体中文](README.md) | **English**
 
-A Claude skill for designing modern product logos: **skeleton first, color later**.
+A Claude skill for designing modern product logos: **skeleton first, color later**. Translating fuzzy brand ideas into marks with Bauhaus inevitability, mathematical order, high-order curvature tension, and OS-grade craft.
 
 <p align="center">
   <img src="assets/example_svg_s_office.svg" width="240" alt="Example: rounded square with a negative-space S">
 </p>
 <p align="center"><sub>Example: rounded square with a negative-space S, redrawn as precise vector in stage 3.5</sub></p>
+
+## Core Value Proposition: The First Principles of Logo Design
+
+A logo is not an illustration or a decorative sticker—it is a distinct design object governed by intrinsic structural laws.
+
+This skill translates intuitive, divergent brand ideas into the **inevitable first principles of authentic logos**:
+
+- **Bauhaus Inevitability**: Every stroke is essential—one stroke more is redundancy; one stroke less is collapse. Imagery becomes the contour, not external decoration.
+- **Mathematical Order**: All stems, arcs, and clearances share a strict baseline module $w$, built from disciplined boolean geometry.
+- **High-Order Curvature (G²)**: Continuous curvature transitions (squircles) and taut arcs eliminate abrupt mechanical joints.
+- **OS-Grade Durability**: **Skeleton first, color later**. The mark must stand resolute in pure monochrome and remain razor-sharp at 16px.
 
 ## What it does
 
@@ -23,6 +34,10 @@ Stage 4    Color & deliver    Color diagnosis → role assignment → A/B/C sche
 ```
 
 Three image providers are supported: **Gemini (Nano Banana)**, **ChatGPT (OpenAI image models)**, and **Doubao (Volcengine Ark Seedream)**.
+
+> 💡 **Usage Note**:
+> - **Prompt Generation**: We recommend using Gemini models for the conversational Agent, as its prompts tend to offer richer spatial and conceptual imagination.
+> - **Image Generation**: Supports Gemini, ChatGPT, Doubao, and other compatible models (simply select the corresponding provider in your setup).
 
 > The skill itself talks to you in Chinese. Prompts are stored in both Chinese and English.
 
