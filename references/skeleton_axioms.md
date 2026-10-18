@@ -1,65 +1,65 @@
-# 骨架公理
+# Skeleton Axioms
 
-骨架就是 logo 本身。这份文档是整个 skill 的核心：把用户感性、具象的品牌需求，翻译成具备**形式必然性、数学秩序、操作系统级精度**的骨架。
+The skeleton is the logo itself. This document is the core of the whole skill: it translates the user's emotional, concrete brand needs into a skeleton with **formal inevitability, mathematical order and OS-grade precision**.
 
-同一套公理有两种用法：
+The same axioms are used in two ways:
 
-- **造**（阶段 2）：推导方向、写提示词。
-- **看**（阶段 3）：诊断生成图。诊断就是把公理反过来用，看哪一条被违反了。
+- **Build** (stage 2): derive directions and write prompts.
+- **Read** (stage 3): diagnose generated images. Diagnosis is the axioms used in reverse, to see which one was violated.
 
-每条公理都按四项写：**定义 → 怎么翻译成提示词 → 违反时像什么 → 负向词**。
+Each axiom is written in four parts: **definition → how to translate it into a prompt → what a violation looks like → negative words**.
 
-## 目录
+## Contents
 
-1. 公理一：形式的必然性
-2. 公理二：数学秩序
-3. 公理三：负向防御（两侧都封）
-4. 闭合还是开放
-5. 按标志类型应用
-6. 诊断顺序
-7. 参照样本
+1. Axiom one: formal inevitability
+2. Axiom two: mathematical order
+3. Axiom three: negative defense (block both sides)
+4. Closed or open
+5. Applying by mark type
+6. Diagnosis order
+7. Reference samples
 
 ---
 
-## 1. 公理一：形式的必然性
+## 1. Axiom one: formal inevitability
 
-### 定义
+### Definition
 
-- 拒绝贴花式设计：不在本体外挂小装饰（字母边贴树叶、文字旁画小翅膀）。
-- 不描摹物体本身，只提取它在空间中的**动势**。意象要作为生长动势，直接演变成主体骨架与字怀轮廓：**意象的边缘就是主体的轮廓**。
-- 多一笔是冗余，少一笔则解体。能拿掉而不影响整体的部件，就删掉。
+- Reject appliqué design: do not hang small decorations outside the main body (a leaf beside a letter, little wings next to a word).
+- Do not trace the object itself; extract only its **momentum** in space. The imagery should become a growth momentum that turns directly into the main skeleton and the counter outline: **the edge of the imagery is the contour of the main body**.
+- One stroke more is redundancy; one stroke less is collapse. Delete any part that can be removed without affecting the whole.
 
-### 意象降维
+### Imagery reduction
 
-把产品概念翻译成动势，再翻译成结构：
+Translate the product concept into a momentum, then into a structure:
 
-| 概念 | 动势 | 常见结构 |
+| Concept | Momentum | Common structure |
 |---|---|---|
-| 成长、萌发 | 自下而上的单一曲率 | 从主干底部升起、与外壳内壁平行的弧形 |
-| 思考、认知 | 同心、回环、共振 | 同心圆弧、嵌套环 |
-| 连接、协作 | 切线、交织、咬合 | 两个相同单元中心对称咬合 |
-| 速度、效率 | 开口、喷射、加速 | 对称的开放弧、楔形 |
-| 庇护、陪伴、沉浸 | 环抱、容器 | 闭合外环包住内核 |
-| 开启、阅读 | 对称展开 | 中轴对称的两片 |
-| 工作、界面 | 网格、窗口、层叠 | 圆角方块 + 负空间切割 |
+| Growth, sprouting | A single curvature rising from below | An arc rising from the base of the stem, parallel to the inner wall of the shell |
+| Thinking, cognition | Concentric, looping, resonating | Concentric arcs, nested rings |
+| Connection, collaboration | Tangent, interwoven, interlocking | Two identical units interlocking with central symmetry |
+| Speed, efficiency | Open, projecting, accelerating | A symmetric open arc, a wedge |
+| Shelter, companionship, immersion | Embracing, containing | A closed outer ring wrapping an inner core |
+| Opening, reading | Symmetric unfolding | Two leaves symmetric about a central axis |
+| Work, interface | Grid, window, layering | A rounded square with negative-space cuts |
 
-同一个概念可以有多种结构。推导方向时，让 3–4 个方向在结构上真正不同。
+The same concept can have many structures. When deriving directions, make the 3–4 directions genuinely different in structure.
 
-### 提示词怎么说
+### How to say it in the prompt
 
-- 写意象时只写几何化的形状：`a rising lens-shaped leaf formed by two intersecting arcs`，不写 `a sprout with leaves`。
-- 明确意象和主体的关系：`the loop of the letter IS the leaf shape`，`the motif forms the counter of the letter`，不要写 `with a leaf next to the letter`。
+- Describe imagery only as geometric shapes: `a rising lens-shaped leaf formed by two intersecting arcs`, not `a sprout with leaves`.
+- State the relation between the imagery and the main body explicitly: `the loop of the letter IS the leaf shape`, `the motif forms the counter of the letter`, not `with a leaf next to the letter`.
 
-### 违反时像什么
+### What a violation looks like
 
-| 看起来像 | 原因 |
+| It looks like | Cause |
 |---|---|
-| 街角咖啡馆、精油手作坊、文艺花店的招牌 | 画了树杈、叶脉、枝丫等具象细节 |
-| 字母贴了个小图标 | 意象外挂在主体旁边，没有长进结构 |
-| 浮空的烛火、火苗 | 部件脱离主体，悬在外面 |
-| 莫名的横杠、小钩 | 非必然笔画 |
+| The sign of a corner café, an essential-oil workshop or an arty flower shop | Concrete details such as branches, veins and twigs were drawn |
+| A letter with a small icon stuck on | The imagery hangs beside the main body and has not grown into the structure |
+| A floating candle flame | A part has detached from the body and hangs outside it |
+| A stray bar or small hook | A stroke that is not inevitable |
 
-### 负向词
+### Negative words
 
 ```
 no illustration, no realistic leaves, no tree branches, no veins, no botanical details,
@@ -68,194 +68,194 @@ no decorative add-ons, no floating detached elements, no flame or smoke wisps
 
 ---
 
-## 2. 公理二：数学秩序
+## 2. Axiom two: mathematical order
 
-### 2.1 模数化线宽
+### 2.1 Modular stroke width
 
-**定义**：全标的主干、圆弧、切角、间距共享同一个基准模数 w 及其固定倍数（0.5w、2w），严禁随手粗细不均。
+**Definition**: the stems, arcs, chamfers and clearances of the whole mark share one base module w and its fixed multiples (0.5w, 2w). Casual variation in thickness is forbidden.
 
-**重量取中**：
+**Take the middle weight**:
 
-- 标准是 **16px 下轮廓仍可辨认**，不是越粗越好。
-- 往粗走会变成笨重色块，往细走会变成书法线香。答案在中间：**中量级、闭合轮廓、厚薄有致**。
-- 需要切缝时，切缝宽度也是模数的倍数；发丝级细缝在 16px 下会消失。
+- The standard is that **the outline is still recognizable at 16px**, not that heavier is better.
+- Going heavy produces clumsy blocks of color; going thin produces calligraphic incense-stick lines. The answer is in the middle: **medium weight, a closed outline, with a deliberate rhythm of thick and thin**.
+- When you need a cut, the cut width is also a multiple of the module; a hairline gap disappears at 16px.
 
-**提示词**：`uniform stroke width throughout, balanced medium stroke weight`。不要写 `bold`、`thick`、`heavy`，也不要写 `thin`、`delicate`、`hairline`，它们会把结果推向两端。
+**Prompt**: `uniform stroke width throughout, balanced medium stroke weight`. Do not write `bold`, `thick` or `heavy`, and do not write `thin`, `delicate` or `hairline`; they push the result to the two extremes.
 
-**违反时像什么**：
+**What a violation looks like**:
 
-| 看起来像 | 原因 |
+| It looks like | Cause |
 |---|---|
-| 手绘、杂乱 | 线宽各处不同 |
-| 推土机、重型体育潮牌 | 过粗，变成实心色块 |
-| 线香、毛笔字、SPA、瑜伽馆 | 过细，单线游走、没有结构支撑 |
-| 缩小后糊成一团 | 依赖细缝或细节 |
+| Hand-drawn, messy | Stroke width varies from place to place |
+| A bulldozer, a heavy sports-streetwear brand | Too heavy; becomes a solid block of color |
+| Incense sticks, brush calligraphy, a spa or yoga studio | Too thin; a single line wanders with no structural support |
+| Blurs into a lump when shrunk | Relies on thin gaps or fine detail |
 
-### 2.2 布尔构造
+### 2.2 Boolean construction
 
-**定义**：形状不是用钢笔凭手感勾的，而是由基本形通过**加、减、交**切出来的。
+**Definition**: shapes are not traced by feel with a pen; they are cut out of basic forms by **adding, subtracting and intersecting**.
 
-**基本形**：圆、圆角矩形、胶囊、超椭圆。常用的派生形：
+**Basic forms**: circle, rounded rectangle, capsule, squircle. Common derived forms:
 
-- 叶瓣、透镜形 = 两个圆的**交集**
-- 月牙 = 一个圆**减去**另一个错位的圆
-- 字怀、窗口 = 实心形**减去**内部形状（负空间）
+- Leaf, lens = the **intersection** of two circles
+- Crescent = one circle **minus** another offset circle
+- Counter, window = a solid form **minus** an inner shape (negative space)
 
-**三种运算各做什么**：
+**What the three operations do**:
 
-| 运算 | 作用 | 例子 |
+| Operation | Effect | Example |
 |---|---|---|
-| 并（union） | 把部件融合成一个整体，或让两个单元咬合 | 主干与字怀弧融为一体 |
-| 差（subtraction） | 用负空间切出形状、挖出字怀、做切缝 | 圆角方块里切出字母 S |
-| 交（intersection） | 得到叶瓣、透镜这类两端尖、中间饱满的形 | 芽叶 |
+| Union | Fuses parts into one whole, or interlocks two units | A stem and a counter arc fused into one |
+| Subtraction | Cuts shapes, hollows out counters and makes slits with negative space | An S cut out of a rounded square |
+| Intersection | Gives forms pointed at both ends and full in the middle, like leaves and lenses | A sprout |
 
-布尔运算会留下可检验的痕迹：共享的边、一致的半径、可以追溯的圆心。
+Boolean operations leave checkable traces: shared edges, consistent radii, circle centers that can be traced back.
 
-**提示词**：用运算的结果描述，而不是写 `boolean`：
+**Prompt**: describe the result of the operation, do not write `boolean`:
 
 - `a solid rounded-square tile with the letter cut out of it as negative space`
 - `a lens shape formed by the overlap of two equal circles`
 - `two identical shapes merged into one continuous form`
 
-**违反时像什么**：形状边缘飘忽、像钢笔随手描的；几个部件之间没有共享的边，像拼贴。
+**What a violation looks like**: edges that drift, as if traced casually with a pen; parts that share no edges, like a collage.
 
-### 2.3 连续曲率
+### 2.3 Continuous curvature
 
-**定义**：
+**Definition**:
 
-- 弧线要有张力，像拉满的弓弦或工业流体切面；向内塌的软弧显得泄气。
-- 平行的笔画来自同心圆（外圆 R、内圆 R−w）。
-- **直线与弧的连接要曲率连续（G²），不只是相切（G¹）。** 直线接一段标准圆弧只有 G¹：曲率在切点从 0 突变到 1/R，看起来是「机械死圆」，转角处有一个可感知的「接头」。G² 连接让曲率逐渐变化，就是 Apple 超椭圆圆角的那种顺滑感。
-- 两端都要避免：机械死圆，和手绘的松散曲线。
+- Arcs need tension, like a fully drawn bowstring or an industrial fluid section; a soft arc that caves inward looks deflated.
+- Parallel strokes come from concentric circles (outer circle R, inner circle R−w).
+- **A line meeting an arc must be curvature-continuous (G²), not merely tangent (G¹).** A straight line joined to a standard circular arc is only G¹: the curvature jumps from 0 to 1/R at the tangent point, which reads as a "mechanical dead circle" with a perceptible "joint" at the corner. A G² join lets the curvature change gradually, which is the smoothness of Apple's squircle corner.
+- Avoid both ends: the mechanical dead circle, and loose hand-drawn curves.
 
-**提示词**：图像模型听不懂 G²，要写成它能执行的样子：
+**Prompt**: image models do not understand G², so write it in a form they can execute:
 
 `smooth continuous-curvature corners like a squircle, no visible joint between straight and curved segments, taut arcs with tension`
 
-**违反时像什么**：
+**What a violation looks like**:
 
-| 看起来像 | 原因 |
+| It looks like | Cause |
 |---|---|
-| 软、泄气 | 弧线塌陷、圆心散乱 |
-| 生硬、机械、像 CAD 草图 | 直线直接接圆弧，转角有接头 |
-| 拖泥带水、手绘感 | 没有可溯源的曲线，随手弯折 |
+| Soft, deflated | Arcs collapse and circle centers are scattered |
+| Stiff, mechanical, like a CAD sketch | A straight line joins a circular arc directly and the corner has a joint |
+| Sluggish, hand-drawn | No traceable curves; bent casually |
 
-SVG 重绘时怎么做 G² 转角，见 `svg_redraw.md` 第 2 节。
+How to build G² corners when redrawing as SVG is in section 2 of `svg_redraw.md`.
 
-### 2.4 质心与力矩平衡
+### 2.4 Center of mass and moment balance
 
-**定义**：
+**Definition**:
 
-- 视觉重心落在几何中心，不右倾，不悬挂失重。
-- 正形与负空间面积平衡。
-- 放射或旋转类图形先选对称方式（2 向如 FENDI，3 向如 Chrome，4 向如 Givenchy，6 向如 OpenAI），再设计单元。
+- The visual center of mass sits at the geometric center: it does not lean right and does not hang weightless.
+- Positive and negative space are balanced in area.
+- For radial or rotational marks, choose the symmetry first (2-fold like FENDI, 3-fold like Chrome, 4-fold like Givenchy, 6-fold like OpenAI), then design the unit.
 
-**提示词**：`visually centered and balanced, even distribution of positive and negative space`；对称类写清 `with 3-fold rotational symmetry around the center`。
+**Prompt**: `visually centered and balanced, even distribution of positive and negative space`; for symmetric marks, state `with 3-fold rotational symmetry around the center`.
 
-**违反时像什么**：好像要倒、要往一边滑；一侧很重一侧很空。
+**What a violation looks like**: it seems about to tip or slide to one side; one side is heavy and the other empty.
 
-### 2.5 动势同频
+### 2.5 Momentum in phase
 
-**定义**：内部部件的边缘与外壳内壁等距平行，倾角统一，视线一气呵成，不被分叉截断。
+**Definition**: the edges of inner parts run parallel to the inner wall of the shell at an equal distance, with a uniform angle, so the eye travels in one stroke and is not cut off by branching.
 
-**提示词**：`the inner shape runs parallel to the inner wall at an equal distance, one continuous flowing movement, no branching`。
+**Prompt**: `the inner shape runs parallel to the inner wall at an equal distance, one continuous flowing movement, no branching`.
 
-**违反时像什么**：结构被截成好几段；视线走到一半断了。
+**What a violation looks like**: the structure is cut into several segments; the eye stops halfway.
 
 ---
 
-## 3. 公理三：负向防御（两侧都封）
+## 3. Axiom three: negative defense (block both sides)
 
-负向词比形容词更有效。但**只封一侧，模型就会往另一侧跑**：封了细线，它就给你笨重黑块；封了黑块，它又回到毛笔线。所以每次都要两侧一起封。
+Negative words work better than adjectives. But **if you block only one side, the model runs to the other**: block thin lines and it gives you clumsy black blocks; block black blocks and it returns to brush lines. So always block both sides together.
 
-| 一侧：太具象、太轻 | 另一侧：太重、太塑料 |
+| One side: too concrete, too light | The other side: too heavy, too plastic |
 |---|---|
 | `no illustration, no realistic leaves, no tree branches` | `no chunky heavy blocks, no solid heavy silhouettes` |
 | `no calligraphic brush strokes, no ink wash` | `no inflated plastic 3D, no bevel, no glossy rendering` |
 | `no hairline strokes, no thin wispy lines` | `no thick clumsy outlines` |
 | `no flame, no smoke, no floating wisps` | `no shadows, no glow, no neon` |
 
-始终都要带：
+Always include:
 
 ```
 no text, no gradients, no texture, no noise, no extra strokes
 ```
 
-偏色问题（发黄、偏金）属于上色阶段，见 `color_dressing.md`。骨架阶段只用近黑和米白，不会出现。
+Color-cast problems (yellowish, gold-tinted) belong to the coloring stage; see `color_dressing.md`. The skeleton stage uses only near-black and off-white, so they do not appear.
 
-**用法**：
+**Usage**:
 
-- 第一轮：两侧的通用负向词都带上，把范围框住。
-- 之后每一轮：针对上一轮掉进的那一侧，加更具体的负向词；同时保留另一侧的负向词，防止矫枉过正。
+- Round one: include the general negative words for both sides to frame the range.
+- Every later round: add more specific negative words against the side the previous round fell to, and keep the negative words of the other side, so the fix does not overcorrect.
 
 ---
 
-## 4. 闭合还是开放
+## 4. Closed or open
 
-没有绝对禁令，但判断有先后：**形状本身的拓扑与力学 > 品牌隐喻 > 风格**。风格只决定「怎么开口」，不能让一个该闭合的形状变成开放。
+There is no absolute ban, but there is an order of judgment: **the topology and mechanics of the shape itself > the brand metaphor > style**. Style decides only "how to open"; it cannot turn a shape that should be closed into an open one.
 
-### 第一步：形状能不能开放
+### Step one: can the shape be open?
 
-| 形状 | 能否开放 | 原因 |
+| Shape | Can it be open? | Reason |
 |---|---|---|
-| 带封闭字怀的字母：O P B D Q A R | 基本要闭合 | 封闭字怀是被认出来的核心特征。把 P 的环剪开，会被读成问号；O 剪开就成了 C |
-| 单侧不对称的结构 | 基本要闭合 | 不闭合就是悬臂梁，视觉上要倒；闭合后力传回主干，才站得稳 |
-| 轴对称或中心对称的结构：钟形、星芒、Λ、X、S | 适合开放 | 对称让两侧相互抵消，重心钉在中心 |
-| 本身开放的字母：C S E F L V | 适合开放 | 顺着原有开口延伸 |
+| Letters with a closed counter: O P B D Q A R | Mostly closed | The closed counter is the core feature by which they are recognized. Cut the loop of a P open and it reads as a question mark; open an O and it becomes a C |
+| One-sided asymmetric structures | Mostly closed | Without closure it is a cantilever and looks about to fall; closure sends the force back to the stem so it stands stable |
+| Axis- or centrally symmetric structures: bell shapes, starbursts, Λ, X, S | Suited to open | Symmetry lets the two sides cancel and pins the center of mass at the center |
+| Letters that are open already: C S E F L V | Suited to open | Extend along the existing opening |
 
-**规则：不对称就闭合；要开放就必须高度对称。**
+**Rule: if it is asymmetric, close it; if it is open, it must be highly symmetric.**
 
-### 第二步：品牌隐喻该不该开放
+### Step two: should the brand metaphor be open?
 
-| | 闭合 | 开放 |
+| | Closed | Open |
 |---|---|---|
-| 能量 | 内聚、孕育、守护 | 喷射、辐射、输出 |
-| 隐喻 | 母体、温室、庇护所、沉浸、安全 | 引擎、光源、信号、连接、爆发 |
-| 样本 | Notion、Apple | Raycast（对称钟形）、Claude（中心对称星芒） |
+| Energy | Cohesive, gestating, protective | Projecting, radiating, outputting |
+| Metaphor | Womb, greenhouse, shelter, immersion, safety | Engine, light source, signal, connection, burst |
+| Samples | Notion, Apple | Raycast (symmetric bell shape), Claude (centrally symmetric starburst) |
 
-### 补充
+### Additions
 
-- **两级闭合**：内部符号可以开放，App 图标的超椭圆容器提供第二级闭合。
-- **闭合也要自然**：顺着已有的动势回旋接合，不是竖线硬拼一个标准半圆。
-- **开放要经得起缩小**：开口要足够大，靠细缝表达的开口在 16px 下会被抹平。
+- **Two-level closure**: the inner symbol can be open, and the squircle container of the app icon provides the second level of closure.
+- **Closure should also feel natural**: curl back and join along the existing momentum; do not force a standard semicircle onto a vertical line.
+- **Openness must survive shrinking**: the opening must be large enough; an opening expressed by a thin gap gets smoothed away at 16px.
 
-案例：Poplex 曾把 P 的环做成开放，大家都觉得「怪」。P 原本有封闭字怀，又是单侧不对称，开放同时触发了「认不出字母」和「要倒」两个反应。改成闭合后，顺着原本舒服的流线回旋接回主干，问题解决。
+Case: Poplex once made the loop of its P open, and everyone found it "odd". The P originally has a closed counter and is one-sided asymmetric, so opening it triggered two reactions at once: "can't recognize the letter" and "about to fall". After it was changed back to closed, curling back to the stem along the originally comfortable flow, the problem was solved.
 
 ---
 
-## 5. 按标志类型应用
+## 5. Applying by mark type
 
-| 类型 | 重点 | 常见失败 |
+| Type | Focus | Common failure |
 |---|---|---|
-| 字母标 | 字母第一眼可读；带字怀的字母闭合；意象长在字怀或笔画里 | 被读成别的符号；意象贴在字母外 |
-| 纯符号 / 抽象图形 | 先选对称方式和单元，再阵列；开放结构靠对称站稳 | 随手曲线；不对称又开口，看起来要倒 |
-| 字标（整个名字） | 笔画统一；字间距按负空间面积均匀而不是物理等距；只在一个字母上做焦点 | 每个字母都加花样 |
-| 组合标（图形 + 字） | 图形和字共享线宽与圆角 | 两套几何语言各说各话 |
-| App 图标 | 16 / 32 / 180px 都要看，浅色深色都要看 | 只在大图上评审 |
+| Letter mark | The letter is readable at first glance; letters with counters are closed; the imagery grows inside the counter or strokes | Read as another symbol; the imagery stuck outside the letter |
+| Pure symbol / abstract form | Choose the symmetry and unit first, then array; open structures stand on symmetry | Casual curves; asymmetric and open, so it looks about to fall |
+| Wordmark (the whole name) | Uniform strokes; letter spacing even by negative-space area, not physical distance; a focal point on only one letter | Flourishes on every letter |
+| Combination mark (symbol + text) | The symbol and the text share stroke width and corner radius | Two geometric languages talking past each other |
+| App icon | Check at 16 / 32 / 180px, on light and dark | Reviewed only at large size |
 
 ---
 
-## 6. 诊断顺序
+## 6. Diagnosis order
 
-1. **识别**：一眼认得出它是什么吗（字母 / 符号本体）？
-2. **必然性**（公理一）：有具象细节、外挂装饰或多余笔画吗？
-3. **拓扑**（第 4 节）：闭合或对称策略成立吗？
-4. **秩序**（公理二）：线宽统一且中量吗？是布尔切出来的吗？曲率连续吗？重心稳吗？动线连贯吗？
-5. **缩小**：用 `make_preview.py` 看 16px、32px，还认得出吗？
+1. **Recognition**: can you tell what it is at a glance (the letter or the symbol itself)?
+2. **Inevitability** (axiom one): are there concrete details, external decoration or extra strokes?
+3. **Topology** (section 4): does the closure or symmetry strategy hold?
+4. **Order** (axiom two): is the stroke width uniform and medium? Was it cut by boolean operations? Is the curvature continuous? Is the center of mass stable? Is the line of movement coherent?
+5. **Shrinking**: look at 16px and 32px with `make_preview.py`; is it still recognizable?
 
-输出格式：
+Output format:
 
-- 先说要保留的。
-- 再列 1–3 个问题，每个写「看起来像什么 → 违反哪条公理 → 改法」。
-- 最后说下一轮的负向词怎么调（公理三）：加哪一侧，保留哪一侧。
+- First say what to keep.
+- Then list 1–3 problems, each as "what it looks like → which axiom it violates → the fix".
+- Finally say how to adjust the negative words for the next round (axiom three): which side to add, which side to keep.
 
 ---
 
-## 7. 参照样本
+## 7. Reference samples
 
-- **OpenAI**：6 向旋转对称，等宽线。
-- **Chrome**：3 向对称，同心圆与切线分割，三块面积相等。
-- **Figma**：模数化的圆与半圆拼合，所有圆角半径相同。
-- **Raycast**：开放结构 + 轴对称钟形，靠对称站稳。
-- **Claude**：开放辐射 + 中心对称，由外层容器完成第二级闭合。
-- **macOS Dock 图标**：符号本体基本纯平，精度来自几何，光感和投影由系统容器统一提供。
+- **OpenAI**: 6-fold rotational symmetry, equal-width lines.
+- **Chrome**: 3-fold symmetry, split by concentric circles and tangents, three equal areas.
+- **Figma**: modular circles and semicircles joined together, all corner radii identical.
+- **Raycast**: open structure + axis-symmetric bell shape, standing on symmetry.
+- **Claude**: open radiation + central symmetry, with the outer container providing the second level of closure.
+- **macOS Dock icons**: the symbol itself is almost entirely flat; the precision comes from geometry, and lighting and drop shadow are supplied uniformly by the system container.

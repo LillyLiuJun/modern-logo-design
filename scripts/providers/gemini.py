@@ -1,4 +1,4 @@
-"""Gemini（Nano Banana）。参考图直接随请求发送。"""
+"""Gemini (Nano Banana). Reference images are sent directly with the request."""
 from __future__ import annotations
 
 import mimetypes

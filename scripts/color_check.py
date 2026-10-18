@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""色彩诊断：输入 2–4 个色值，输出明度、彩度、色相、冷暖、两两对比度和工程风险提示。
+"""Color diagnosis: give 2–4 color values; outputs lightness, chroma, hue, warmth, pairwise contrast and engineering risk notes.
 
-不调用 API，不依赖第三方库。
+Calls no API and needs no third-party library.
 
-用法：
+Usage:
   python scripts/color_check.py "#211811" "#FFF5EF" "#FF7622"
   python scripts/color_check.py 211811 FFF5EF FF7622 --json
 """
@@ -14,7 +14,7 @@ import json
 import math
 import sys
 
-# 桌面与容器参考色：浅色桌面近白，深色桌面近黑
+# Reference desktop colors: near-white for a light desktop, near-black for a dark one
 LIGHT_DESKTOP = "#FFFFFF"
 DARK_DESKTOP = "#1C1C1E"
 
@@ -24,7 +24,7 @@ def parse_hex(s: str) -> tuple[int, int, int]:
     if len(s) == 3:
         s = "".join(c * 2 for c in s)
     if len(s) != 6:
-        raise ValueError(f"不是有效色值：{s}")
+        raise ValueError(f"not a valid color value: {s}")
     return tuple(int(s[i:i + 2], 16) for i in (0, 2, 4))  # type: ignore[return-value]
 
 
@@ -60,32 +60,32 @@ def oklch(rgb) -> tuple[float, float, float]:
 
 def temperature(C: float, h: float) -> str:
     if C < 0.008:
-        return "中性"
-    pre = "微" if C < 0.03 else ""
-    # OKLCH 色相：约 0–110 红橙黄、330–360 品红偏暖；140–300 绿青蓝偏冷
+        return "neutral"
+    pre = "slightly " if C < 0.03 else ""
+    # OKLCH hue: about 0–110 red/orange/yellow and 330–360 magenta are warm; 140–300 green/cyan/blue are cool
     if h < 110 or h >= 330:
-        return pre + "暖"
+        return pre + "warm"
     if 140 <= h < 300:
-        return pre + "冷"
-    return "中性"
+        return pre + "cool"
+    return "neutral"
 
 
 def lightness_label(L: float) -> str:
     if L < 0.35:
-        return "深"
+        return "dark"
     if L < 0.8:
-        return "中"
-    return "浅"
+        return "mid"
+    return "light"
 
 
 def chroma_label(C: float) -> str:
     if C < 0.03:
-        return "近无彩"
+        return "achromatic"
     if C < 0.1:
-        return "低彩"
+        return "low"
     if C < 0.17:
-        return "中彩"
-    return "高彩"
+        return "medium"
+    return "high"
 
 
 def diagnose(hexes: list[str]) -> dict:
@@ -98,22 +98,22 @@ def diagnose(hexes: list[str]) -> dict:
         on_dark = contrast(rgb, parse_hex(DARK_DESKTOP))
         notes = []
         if on_light < 1.5:
-            notes.append("在浅色桌面上会融化：做底板时需要内描边或改用深色底")
+            notes.append("melts on a light desktop: as a base it needs an inner stroke or a dark base instead")
         if on_dark < 1.5:
-            notes.append("在深色桌面上会融化：做底板时边界看不清")
+            notes.append("melts on a dark desktop: as a base its edge is unclear")
         if C >= 0.17 and 0.55 <= L <= 0.8:
-            notes.append("高彩中明度：适合焦点，大面积使用会浮躁；与浅色对比通常不足，不宜做浅底上的细线")
+            notes.append("high chroma, mid lightness: suits an accent, restless over a large area; contrast with light colors is usually insufficient, so avoid thin lines on a light base")
         if C < 0.03 and L < 0.3 and hx_n in ("#000000",):
-            notes.append("纯黑：建议换成带色相的深色")
+            notes.append("pure black: replace with a dark color that has a hue")
         colors.append({
             "hex": hx_n,
             "oklch": {"L": round(L, 3), "C": round(C, 3), "h": round(h, 1)},
-            "明度": lightness_label(L),
-            "彩度": chroma_label(C),
-            "冷暖": temperature(C, h),
-            "对比度_浅色桌面": round(on_light, 2),
-            "对比度_深色桌面": round(on_dark, 2),
-            "提示": notes,
+            "lightness": lightness_label(L),
+            "chroma": chroma_label(C),
+            "warmth": temperature(C, h),
+            "contrast_light_desktop": round(on_light, 2),
+            "contrast_dark_desktop": round(on_dark, 2),
+            "notes": notes,
         })
 
     pairs = []
@@ -122,14 +122,14 @@ def diagnose(hexes: list[str]) -> dict:
             a, b = colors[i]["hex"], colors[j]["hex"]
             cr = contrast(parse_hex(a), parse_hex(b))
             if cr >= 4.5:
-                use = "可放文字和细线"
+                use = "fine for text and thin lines"
             elif cr >= 3:
-                use = "可做图形，不放文字"
+                use = "fine for shapes, not for text"
             else:
-                use = "不能互为前景/背景，只能相邻"
-            pairs.append({"a": a, "b": b, "对比度": round(cr, 2), "用法": use})
+                use = "cannot be foreground/background of each other, only adjacent"
+            pairs.append({"a": a, "b": b, "contrast": round(cr, 2), "use": use})
 
-    # 色相间距（只看有彩色）
+    # Hue spacing (chromatic colors only)
     chromatic = [c for c in colors if c["oklch"]["C"] >= 0.03]
     hue_notes = []
     for i in range(len(chromatic)):
@@ -137,42 +137,42 @@ def diagnose(hexes: list[str]) -> dict:
             d = abs(chromatic[i]["oklch"]["h"] - chromatic[j]["oklch"]["h"])
             d = min(d, 360 - d)
             if d <= 30:
-                txt = "相邻色相，可以做渐变"
+                txt = "adjacent hues, can make a gradient"
             elif d >= 150:
-                txt = "接近互补，不能做渐变（中间会发灰）"
+                txt = "near-complementary, cannot make a gradient (the middle goes grey)"
             else:
-                txt = "色相跨度较大，渐变需谨慎"
-            hue_notes.append({"a": chromatic[i]["hex"], "b": chromatic[j]["hex"], "色相差": round(d, 1), "说明": txt})
+                txt = "wide hue span, be careful with a gradient"
+            hue_notes.append({"a": chromatic[i]["hex"], "b": chromatic[j]["hex"], "hue_diff": round(d, 1), "note": txt})
 
     return {"colors": colors, "pairs": pairs, "hue": hue_notes}
 
 
 def print_report(r: dict) -> None:
-    print("色值        L     C      h      明度 彩度   冷暖   对浅桌面 对深桌面")
+    print("Color       L     C      h      Light  Chroma     Warmth          vs light  vs dark")
     for c in r["colors"]:
         o = c["oklch"]
-        print(f"{c['hex']}  {o['L']:.3f} {o['C']:.3f} {o['h']:6.1f}  {c['明度']}   {c['彩度']:<4} {c['冷暖']:<4} "
-              f"{c['对比度_浅色桌面']:>6}  {c['对比度_深色桌面']:>6}")
+        print(f"{c['hex']}  {o['L']:.3f} {o['C']:.3f} {o['h']:6.1f}  {c['lightness']:<5}  {c['chroma']:<10} {c['warmth']:<15} "
+              f"{c['contrast_light_desktop']:>6}  {c['contrast_dark_desktop']:>8}")
     print()
     for c in r["colors"]:
-        for n in c["提示"]:
+        for n in c["notes"]:
             print(f"! {c['hex']} {n}")
-    print("\n两两对比度（WCAG）")
+    print("\nPairwise contrast (WCAG)")
     for p in r["pairs"]:
-        print(f"  {p['a']} / {p['b']}  {p['对比度']:>5}  {p['用法']}")
+        print(f"  {p['a']} / {p['b']}  {p['contrast']:>5}  {p['use']}")
     if r["hue"]:
-        print("\n色相关系")
+        print("\nHue relations")
         for h in r["hue"]:
-            print(f"  {h['a']} / {h['b']}  相差 {h['色相差']}°  {h['说明']}")
+            print(f"  {h['a']} / {h['b']}  differ by {h['hue_diff']}°  {h['note']}")
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="色彩诊断（不调用 API）")
-    ap.add_argument("colors", nargs="+", help="2–4 个色值，如 #211811")
-    ap.add_argument("--json", action="store_true", help="输出 JSON")
+    ap = argparse.ArgumentParser(description="Color diagnosis (no API call)")
+    ap.add_argument("colors", nargs="+", help="2–4 color values, e.g. #211811")
+    ap.add_argument("--json", action="store_true", help="output JSON")
     a = ap.parse_args()
     if not 1 <= len(a.colors) <= 6:
-        print("请输入 2–4 个色值", file=sys.stderr)
+        print("Please give 2–4 color values", file=sys.stderr)
         return 2
     try:
         r = diagnose(a.colors)

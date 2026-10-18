@@ -1,9 +1,9 @@
-"""豆包图像模型（火山方舟 Seedream）。
+"""Doubao image models (Volcengine Ark Seedream).
 
-接口：POST {base}/images/generations，Bearer 鉴权。
-参考图以 data URI（data:image/png;base64,...）放进 image 字段，可传多张。
-默认关闭「AI 生成」水印，要求返回 base64，避免官方图片链接过期。
-不同版本支持的参数不同：可选参数被模型拒绝时，自动去掉后重试。
+Endpoint: POST {base}/images/generations, Bearer auth.
+Reference images go into the image field as data URIs (data:image/png;base64,...); several may be passed.
+The "AI generated" watermark is off by default and base64 is requested, so official image links cannot expire.
+Different versions support different parameters: when the model rejects an optional parameter, it is removed and the request retried.
 """
 from __future__ import annotations
 
@@ -16,10 +16,10 @@ from providers import GenResult
 
 NAME = "doubao"
 
-# 画幅 → 约 2K 的像素尺寸（Seedream 接受「宽x高」）。
+# Aspect ratio -> pixel size of about 2K (Seedream accepts "WIDTHxHEIGHT").
 SIZES = {"1:1": "2048x2048", "4:3": "2304x1728", "3:4": "1728x2304", "16:9": "2560x1440",
          "9:16": "1440x2560", "3:2": "2496x1664", "2:3": "1664x2496"}
-# 去掉也不影响出图的参数；模型不支持时自动去掉。
+# Parameters that can be dropped without affecting generation; removed automatically if the model does not support them.
 OPTIONAL = ("watermark", "response_format", "size")
 
 
@@ -29,7 +29,7 @@ def _data_uri(p: Path) -> str:
 
 
 def verify() -> str:
-    raise NotImplementedError("豆包没有不出图的验证接口，第一次出图时会验证 key")
+    raise NotImplementedError("Doubao has no validation endpoint that avoids generating an image; the key is validated on the first generation")
 
 
 def _post(body: dict):
@@ -43,11 +43,12 @@ def _post(body: dict):
 def _error(r) -> RuntimeError:
     hint = ""
     if "InvalidEndpointOrModel" in r.text:
-        hint = ("\n  提示：key 有效，但这个模型还没开通或 ID 不对。请在火山方舟控制台「开通管理」开通 Seedream，"
-                "再把 .env 里的 DOUBAO_MODEL 改成控制台显示的模型 ID（也可以填推理接入点 ID，形如 ep-xxxx）。")
+        hint = ("\n  Hint: the key is valid, but this model is not enabled or the ID is wrong. Enable Seedream under "
+                "\"Activation Management\" in the Volcengine Ark console, then set DOUBAO_MODEL in .env to the model ID shown "
+                "there (an inference endpoint ID such as ep-xxxx also works).")
     elif r.status_code in (401, 403):
-        hint = "\n  提示：key 无效或没有权限，请检查 DOUBAO_API_KEY。"
-    return RuntimeError(f"HTTP {r.status_code}：{r.text[:500]}{hint}")
+        hint = "\n  Hint: the key is invalid or lacks permission. Check DOUBAO_API_KEY."
+    return RuntimeError(f"HTTP {r.status_code}: {r.text[:500]}{hint}")
 
 
 def generate(prompt: str, refs: list[Path], aspect: str, size: str, quality: str) -> GenResult:
@@ -73,7 +74,7 @@ def generate(prompt: str, refs: list[Path], aspect: str, size: str, quality: str
             except ValueError:
                 param = ""
             if param in OPTIONAL and param in body:
-                print(f"  ! 当前模型不支持参数 {param}，已去掉后重试")
+                print(f"  ! The current model does not support the parameter {param}; removed it and retrying")
                 body.pop(param)
                 continue
         break

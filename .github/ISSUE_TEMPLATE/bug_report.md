@@ -1,24 +1,24 @@
 ---
-name: Bug 报告 / Bug report
-about: 出图失败、脚本报错、流程不符合预期
+name: Bug report
+about: Image generation fails, a script errors, or the workflow does not behave as expected
 labels: bug
 ---
 
-> ⚠️ 不要贴 API Key。贴日志前请先检查。
+> ⚠️ Do not paste API keys. Check your logs before pasting them.
 
-**发生了什么**
-
-
-**怎么复现**（运行的命令或对 Claude 说的话）
+**What happened**
 
 
-**完整的报错或输出**
+**How to reproduce** (the command you ran, or what you said to Claude)
+
+
+**The full error or output**
 
 ```
 ```
 
-**环境**
+**Environment**
 
-- 图像模型：Gemini / OpenAI / 豆包（是否用了中转地址：是 / 否）
-- 系统：macOS / Windows / Linux
-- Python 版本：
+- Image provider: Gemini / OpenAI / Doubao (using a relay address: yes / no)
+- OS: macOS / Windows / Linux
+- Python version:

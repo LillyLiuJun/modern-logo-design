@@ -1,13 +1,13 @@
 ---
-name: 功能建议 / Feature request
-about: 想增加的流程、模型支持或脚本
+name: Feature request
+about: A workflow, provider or script you would like added
 labels: enhancement
 ---
 
-**想解决什么问题**
+**What problem do you want to solve**
 
 
-**你希望怎么做**（可选）
+**How would you like it to work** (optional)
 
 
-**其他补充**
+**Anything else**

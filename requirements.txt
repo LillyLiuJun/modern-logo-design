@@ -2,9 +2,9 @@ python-dotenv>=1.0.0
 Pillow>=10.0.0
 # Gemini
 google-genai>=1.30.0
-# ChatGPT（OpenAI 图像模型）
+# ChatGPT (OpenAI image models)
 openai>=1.99.0
-# 豆包（火山方舟）
+# Doubao (Volcengine Ark)
 requests>=2.31.0
-# SVG 渲染（无系统依赖）
+# SVG rendering (no system dependencies)
 resvg-py>=0.2.0

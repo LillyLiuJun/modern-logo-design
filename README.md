@@ -1,75 +1,75 @@
 # Modern Logo Design
 
-**简体中文** | [English](README.en.md)
+**English** | [简体中文](README.zh-CN.md)
 
-为产品设计现代 logo 的 skill：**先骨架，后颜色**。将感性、发散、具象的品牌需求，翻译为具备包豪斯必然性、现代数学秩序、高阶曲率张力与操作系统级质感的工程级矢量 logo。
+A skill for designing modern product logos: **skeleton first, color later**. Translating fuzzy brand ideas into marks with Bauhaus inevitability, mathematical order, high-order curvature tension, and OS-grade craft.
 
 <p align="center">
-  <img src="assets/example_svg_s_office.svg" width="240" alt="示例：圆角方块 + 负空间 S">
+  <img src="assets/example_svg_s_office.svg" width="240" alt="Example: rounded square with a negative-space S">
 </p>
-<p align="center"><sub>示例：圆角方块 + 负空间 S，由 skill 在阶段 3.5 重绘为精确矢量</sub></p>
+<p align="center"><sub>Example: rounded square with a negative-space S, redrawn as precise vector in stage 3.5</sub></p>
 
-## 核心价值主张：Logo 的固有法则
+## Core Value Proposition: The First Principles of Logo Design
 
-Logo 不是画作或装饰贴纸，而是一种拥有固有结构与数学规律的严苛设计对象。
+A logo is not an illustration or a decorative sticker—it is a distinct design object governed by intrinsic structural laws.
 
-本 Skill 将感性、发散的品牌直觉，转化为**所有合格 Logo 成立的必然原则**：
+This skill translates intuitive, divergent brand ideas into the **inevitable first principles of authentic logos**:
 
-- **包豪斯必然性**：多一笔是冗余，少一笔则解体。意象即主体轮廓，拒绝外挂装饰贴花。
-- **现代数学秩序**：主干、圆弧与间距共享基准模数 $w$，基于严密的布尔几何构造。
-- **高阶曲率张力（G²）**：超椭圆连续曲率与紧绷弧线，消除机械死圆角的生硬接头。
-- **操作系统级质感**：**先骨架，后颜色**。单色形态必须独立成立，16px 极小尺寸下锐利不溃烂。
+- **Bauhaus Inevitability**: Every stroke is essential—one stroke more is redundancy; one stroke less is collapse. Imagery becomes the contour, not external decoration.
+- **Mathematical Order**: All stems, arcs, and clearances share a strict baseline module $w$, built from disciplined boolean geometry.
+- **High-Order Curvature (G²)**: Continuous curvature transitions (squircles) and taut arcs eliminate abrupt mechanical joints.
+- **OS-Grade Durability**: **Skeleton first, color later**. The mark must stand resolute in pure monochrome and remain razor-sharp at 16px.
 
-## 它做什么
+## What it does
 
-你给出产品背景，skill 帮你推导意象、出图、挑选、精修、上色，最后交付可用的矢量 logo 和 App 图标预览。每个阶段结束都由你确认再进入下一步，随时可以退回。
+Give it your product background. The skill derives imagery, generates candidates, helps you pick and refine one, applies color, and delivers a vector logo plus app-icon previews. You confirm at the end of every stage, and can step back at any time.
 
 ```
-阶段 0    环境准备        检查图像 API
-阶段 1    信息收集        产品名、品类、想表达什么、标志类型
-阶段 2    单色骨架矩阵    推导 3–4 个方向 → 单色出图 → 对照页
-阶段 3    选定与微调      诊断 → 局部调整 → 锁定 1 个骨架
-阶段 3.5  SVG 重绘        Claude 把骨架重绘成精确矢量（推荐）
-阶段 4    上色与交付      色彩诊断 → 角色分配 → A/B/C 三种范式 → App 图标预览
+Stage 0    Setup              Check the image API
+Stage 1    Brief              Product name, category, what to express, mark type
+Stage 2    Monochrome matrix  Derive 3–4 directions → monochrome images → review page
+Stage 3    Select & refine    Diagnose → local tweaks → lock 1 skeleton
+Stage 3.5  SVG redraw         Claude redraws the skeleton as precise vector (recommended)
+Stage 4    Color & deliver    Color diagnosis → role assignment → A/B/C schemes → app-icon preview
 ```
 
-出图支持三家图像模型：**Gemini（Nano Banana）**、**ChatGPT（OpenAI 图像模型）**、**豆包（火山方舟 Seedream）**。
+Three image providers are supported: **Gemini (Nano Banana)**, **ChatGPT (OpenAI image models)**, and **Doubao (Volcengine Ark Seedream)**.
 
-> 💡 **模型建议（个人使用偏好）**：
-> - **提示词推导**：如果你在 Claude 和 Gemini 模型之间犹豫，个人更倾向推荐使用 Gemini 系列模型作为对话 Agent，某种程度其生成的提示词在空间与意象表达上通常更有想象力。
-> - **下游出图**：支持 Gemini、ChatGPT、豆包等图像模型（配置时选择对应的接口类型即可）。
+> 💡 **Model Note (Personal Preference)**:
+> - **Prompt Generation**: If you are hesitating between Claude and Gemini, we personally lean toward recommending Gemini models as the conversational Agent; to some degree, its prompts tend to offer richer spatial and conceptual imagination.
+> - **Image Generation**: Supports Gemini, ChatGPT, Doubao, and other compatible models (simply select the corresponding provider in your setup).
 
-## 如何逼近你想要的感觉（迭代技巧）
+## How to Converge on Your Desired Mark (Iteration Techniques)
 
-好 Logo 几乎不可能一轮生成抽中，它是一个「推导骨架 → 诊断问题 → 控制变量微调」逐步收敛的过程。如果生成的方案离预期有差距，推荐使用以下两种方法：
+Great logos are rarely hit in a single lottery roll. They are the result of disciplined, stepwise convergence: "derive skeleton → diagnose defects → control-variable micro-tweaks". If initial candidates fall short of your vision, we recommend two practical methods:
 
-### 方法一：截屏参考 Logo，明确指出你认可的具体细节
-发 1~2 张你觉得调性对的现有 Logo 截图给 AI。**切忌只说“参考这个”**，而是明确拆解出你认可的具体元素：
-- “我认可它两根线条咬合形成的通透感”
-- “我喜欢它这个外圈超椭圆转角的挺拔曲率”
-- “我认可它整体的大留白比例，不要太满”
-告诉 AI：“请提取参考图中的这一几何动势，但不要照搬其具体图案。”让 AI 借力成熟标志的形式结构，而不是表面临摹。
+### Method 1: Screenshot Reference Logos & Specify Exactly What You Approve
+Provide 1–2 screenshots of existing logos that embody the vibe you want. **Avoid simply saying "make it like this"**. Instead, explicitly break down which specific elements you approve:
+- "I like how these two strokes interlock to create airy negative space."
+- "I like the taut, upright curvature of this outer squircle corner."
+- "I appreciate the generous whitespace-to-mark ratio."
+Tell the AI: *"Extract this geometric momentum and structural relationship from the reference, but do not copy the literal graphics."* Let AI leverage mature structural geometry rather than superficial mimicry.
 
-### 方法二：用「低维物理语言」描述想法，避免抽象品味词
-当对结果不满意时，尽量避免使用“不够高级”、“差点意思”、“太土”等模糊高维词（AI 无法据此精准修改参数）。
-参考 `references/skeleton_axioms.md`（骨架公理），把感受拆解为可感知的物理维度：
-- **松 / 紧**：内部字怀或切缝是太挤还是太散？
-- **粗 / 细**：主干线宽是显得单薄（发丝线），还是笨重（色块堆积）？
-- **轻 / 重**：视觉重心是偏高显得飘，还是偏低显得沉？
-- **硬 / 软**：转角是机械死直角（需要 G² 连续曲率平滑），还是像随手画的一样泄气（需要增加张力）？
-直接用物理语言提要求（如：“下半部分太沉，请将底部间距拉大 15%；转角过硬，请做微倒角处理”）。描述问题时，**用低维物理语言**，不用「不好看」「不高级」这类品味词。
+### Method 2: Use "Physical Adjectives" Instead of Vague Taste Words
+When evaluating drafts, avoid subjective, high-dimensional words like "not premium enough", "lacks vibe", or "looks dated"—AI cannot tune concrete geometric parameters from taste words.
+Consult `references/skeleton_axioms.md` to translate your feeling into observable, physical dimensions:
+- **Tight vs. Loose**: Is the internal counter or negative-space slit too cramped or too dispersed?
+- **Thick vs. Thin**: Is the primary stroke too skeletal (hairline fragility) or too bulky (clunky blockiness)?
+- **Heavy vs. Light**: Is the visual center of gravity floating too high, or sinking too low?
+- **Sharp vs. Soft**: Are the vertices abrupt mechanical right-angles (needing G² squircle continuity), or slack like casual hand-drawings (needing arc tension)?
+Instruct the AI in physical terms (e.g., *"The lower half feels too bottom-heavy; widen the clearance by 15% and apply micro-radiuses to all vertices"*). When diagnosing problems, **use low-dimensional physical language**; avoid subjective taste words like "looks bad" or "not premium".
 
-## 快速开始
+## Quick Start
 
-### 1. 安装与配置（约 2 分钟）
+### 1. Setup (~2 minutes)
 
-**第 1 步：下载到 skills 目录**
+**Step 1: Download into the skills directory**
 
 ```bash
 git clone https://github.com/LillyLiuJun/modern-logo-design.git ~/.claude/skills/modern-logo-design
 ```
 
-**第 2 步：安装依赖，生成配置文件**
+**Step 2: Install dependencies and create the config file**
 
 ```bash
 cd ~/.claude/skills/modern-logo-design
@@ -77,79 +77,79 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-**第 3 步：打开 `.env`，选一家图像模型，只填它的 Key**
+**Step 3: Open `.env`, pick one image provider, and fill in only its key**
 
-`IMAGE_PROVIDER` 可选 `gemini`、`openai`（ChatGPT）、`doubao`（豆包），对应的 Key 是 `GEMINI_API_KEY`、`OPENAI_API_KEY`、`DOUBAO_API_KEY`。
+`IMAGE_PROVIDER` can be `gemini`, `openai` (ChatGPT) or `doubao`; the matching keys are `GEMINI_API_KEY`, `OPENAI_API_KEY` and `DOUBAO_API_KEY`.
 
-例如用 Gemini：
+For example, with Gemini:
 
 ```ini
 IMAGE_PROVIDER=gemini
-GEMINI_API_KEY=你的 key
+GEMINI_API_KEY=your key
 ```
 
-其余字段不用动。用第三方中转时，才需要另外填 `*_API_BASE_URL`。
+Leave the other fields alone. Only fill in `*_API_BASE_URL` if you use a third-party relay.
 
-**检查一下（可选）**
+**Check it (optional)**
 
 ```bash
 python scripts/check_env.py
 ```
 
-看到「环境就绪」就可以了。这一步可以跳过：skill 第一次出图前会自动检查，缺什么会直接告诉你。
+When you see "environment ready", you're set. You can skip this step: the skill checks automatically before the first image generation and tells you what's missing.
 
-### 2. 开始使用
+### 2. Start Designing
 
-在 Agent 终端中使用（以 Poplex 为例）：
+In your Agent terminal (taking Poplex as an example):
 
-> 帮我给「Poplex」设计一个 logo：
+> Design a logo for "Poplex":
 > 
-> - **名称**：Poplex（首字母大写）。
-> - **品类与场景**：iOS 英语学习 App，面向想把英语用进日常生活的成年人；一句话定位是 *build language from your life*，把生活里遇到的内容变成自己的英语积累，每天高频打开。
-> - **想传达什么**：生长、积累、安静克制、有书卷的编辑感。避免打勾、对话气泡、字母 A–Z、地球、灯泡这类学习 App 的陈旧隐喻。
-> - **标志类型**：纯符号，想先看看这类「生长」意象；用字母 P 和嫩芽组成的元素。
-> - **已有素材（可选）**：附上几张 App 界面截图，以及现有的 P + 墨点标记，作为调性参考而不是照抄。
-> - **关于颜色**：可以不提。前期给了品牌色（例如暖纸底 `#FBF8F5`、品牌橙 `#FF7622`、墨色 `#2A2320`），出图时会用上；如果颜色干扰了形状判断、效果不好，就改回单色，或者在阶段 4 继续优化颜色。
+> - **Name**: Poplex (capital P).
+> - **Category & Context**: An iOS English-learning app for adults who want to use English in daily life. Positioning: *build language from your life*. It turns what you come across in your day into your own English, and is opened every day.
+> - **What to convey**: Growth, accumulation, quiet restraint, a bookish editorial feel. Avoid the usual learning-app clichés: checkmarks, speech bubbles, A–Z letters, globes, light bulbs.
+> - **Mark type**: Pure symbol. I'd like to see this kind of "growth" imagery first, using elements made from the letter P and a sprout.
+> - **Existing material (optional)**: A few app screenshots and the current P + ink-dot mark, as tonal reference rather than something to copy.
+> - **Regarding color**: Color is optional. If you give brand colors upfront (e.g. warm paper `#FBF8F5`, brand orange `#FF7622`, ink `#2A2320`), they are used when generating. If color gets in the way of judging the shape, switch back to monochrome, or keep refining color in stage 4.
 
-上面 5 条正好对应 skill 的「阶段 1：信息收集」，一次性写全就不会被追问。哪条没想好可以直接写「不确定，由你推荐」。
+These five points map one-to-one onto the skill's "Stage 1: Brief", so writing them all upfront avoids follow-up questions. For anything you haven't decided, just write "unsure, you recommend".
 
-Skill 收到后会自动推导 3–4 个截然不同的结构方向，进入骨架出图，并在每轮生成本地可交互的 HTML 对照页供你挑选与逐轮诊断。
+The skill will deduce 3–4 distinct structural directions, enter the skeleton stage, and assemble interactive HTML review pages at each round for visual comparison and diagnosis.
 
-## 目录
+## Layout
 
 ```
 modern-logo-design/
-├── SKILL.md                    # 流程（阶段 0–4）
-├── README.md / README.en.md    # 中文 / 英文说明
-├── LICENSE                     # MIT 开源协议
-├── .env.example                # API 配置模板
+├── SKILL.md                    # Workflow (stages 0–4)
+├── README.md / README.zh-CN.md # English / Chinese docs
+├── LICENSE                     # MIT License
+├── .env.example                # API config template
 ├── requirements.txt
 ├── assets/
-│   └── example_svg_s_office.svg  # SVG 重绘示例
+│   └── example_svg_s_office.svg  # SVG redraw example
 ├── references/
-│   ├── skeleton_axioms.md      # 骨架公理：推导与诊断
-│   ├── svg_redraw.md           # SVG 重绘：约定、步骤、对比、上色
-│   ├── color_dressing.md       # 上色：诊断、角色、三种范式、检查
-│   └── prompt_templates.md     # 中英文提示词模板
+│   ├── skeleton_axioms.md      # Skeleton axioms: derivation and diagnosis
+│   ├── svg_redraw.md           # SVG redraw: conventions, steps, comparison, coloring
+│   ├── color_dressing.md       # Coloring: diagnosis, roles, three schemes, checks
+│   └── prompt_templates.md     # Prompt templates (English; optional translation line)
 └── scripts/
-    ├── _config.py              # 读取 .env
-    ├── check_env.py            # 环境检查
-    ├── generate_image.py       # 出图
-    ├── build_review.py         # 对照页
-    ├── render_svg.py           # SVG 渲染、对比、按图层上色
-    ├── color_check.py          # 色彩诊断
-    ├── make_preview.py         # App 图标预览
-    └── providers/              # 各家模型的连接代码
+    ├── _config.py              # Reads .env
+    ├── check_env.py            # Environment check
+    ├── generate_image.py       # Image generation
+    ├── build_review.py         # Review page
+    ├── render_svg.py           # SVG render, compare, per-layer coloring
+    ├── color_check.py          # Color diagnosis
+    ├── make_preview.py         # App-icon preview
+    └── providers/              # Provider connectors
         ├── gemini.py
         ├── openai_images.py
         └── doubao.py
 ```
 
-## 参与贡献
+## Contributing
 
-欢迎提 issue 和 Pull Request，详见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+Issues and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## 开源协议
+## License
 
-本项目基于 [MIT License](LICENSE) 开源。
+This project is licensed under the [MIT License](LICENSE).
 

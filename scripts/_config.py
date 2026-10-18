@@ -1,7 +1,7 @@
-"""共享配置：从 skill 目录下的 .env 读取图像模型设置。
+"""Shared config: reads the image-provider settings from the .env in the skill folder.
 
-每家模型用同一套命名：<前缀>_API_KEY / <前缀>_API_BASE_URL / <前缀>_MODEL。
-IMAGE_PROVIDER 决定默认用哪一家；系统环境变量优先于 .env。
+Every provider uses the same naming: <PREFIX>_API_KEY / <PREFIX>_API_BASE_URL / <PREFIX>_MODEL.
+IMAGE_PROVIDER decides which one is the default; system environment variables take priority over .env.
 """
 from __future__ import annotations
 
@@ -16,23 +16,23 @@ PLACEHOLDER_KEYS = {"", "your_api_key_here"}
 try:
     from dotenv import load_dotenv
     load_dotenv(ENV_PATH, override=False)
-except ImportError:  # check_env.py 会单独报告缺少依赖
+except ImportError:  # check_env.py reports missing dependencies separately
     pass
 
 
 @dataclass(frozen=True)
 class ProviderInfo:
     key: str          # gemini / openai / doubao
-    label: str        # 给用户看的名字
-    prefix: str       # 环境变量前缀
+    label: str        # name shown to the user
+    prefix: str       # environment variable prefix
     default_model: str
-    default_base_url: str  # 官方地址（留空表示由 SDK 决定）
+    default_base_url: str  # official address (empty means the SDK decides)
 
 
 PROVIDERS = {
-    "gemini": ProviderInfo("gemini", "Gemini（Nano Banana）", "GEMINI", "gemini-3.1-flash-image-preview", ""),
-    "openai": ProviderInfo("openai", "ChatGPT（OpenAI 图像模型）", "OPENAI", "gpt-image-2", ""),
-    "doubao": ProviderInfo("doubao", "豆包（火山方舟 Seedream）", "DOUBAO", "doubao-seedream-4-0-250828",
+    "gemini": ProviderInfo("gemini", "Gemini (Nano Banana)", "GEMINI", "gemini-3.1-flash-image-preview", ""),
+    "openai": ProviderInfo("openai", "ChatGPT (OpenAI image models)", "OPENAI", "gpt-image-2", ""),
+    "doubao": ProviderInfo("doubao", "Doubao (Volcengine Ark Seedream)", "DOUBAO", "doubao-seedream-4-0-250828",
                            "https://ark.cn-beijing.volces.com/api/v3"),
 }
 
@@ -44,7 +44,7 @@ def _env(name: str) -> str:
 def provider_name(override: str | None = None) -> str:
     name = (override or _env("IMAGE_PROVIDER") or "gemini").lower()
     if name not in PROVIDERS:
-        raise ValueError(f"IMAGE_PROVIDER 只能是 {' / '.join(PROVIDERS)}，现在是：{name}")
+        raise ValueError(f"IMAGE_PROVIDER must be one of {' / '.join(PROVIDERS)}, got: {name}")
     return name
 
 
@@ -81,6 +81,6 @@ def output_dir() -> Path:
 def require_key(name: str) -> None:
     if not key_is_set(name):
         raise RuntimeError(
-            f"没有找到 {info(name).prefix}_API_KEY。请把 {SKILL_DIR / '.env.example'} 复制为 .env，"
-            f"并填入 {info(name).label} 的 key。"
+            f"{info(name).prefix}_API_KEY not found. Copy {SKILL_DIR / '.env.example'} to .env "
+            f"and fill in your {info(name).label} key."
         )

@@ -1,186 +1,190 @@
 ---
 name: modern-logo-design
-description: 为产品设计现代 logo：将用户感性、发散、具象的品牌需求，翻译为具备“包豪斯必然性、现代数学秩序、高阶曲率张力与操作系统级质感”的工程级提示词与矢量骨架。先生成纯单色骨架方案，骨架锁定后再上色与生成 App 图标容器预览。每轮把图与设计阐述、中英文提示词做成对照页。用户要做 logo、改 logo、或问 logo 为什么不够现代、不够高级时使用。
+description: Design a modern logo for a product. Translates fuzzy, divergent, concrete brand ideas into engineering-grade prompts and vector skeletons with Bauhaus inevitability, mathematical order, high-order curvature tension and OS-grade craft. First generates pure monochrome skeleton candidates; once a skeleton is locked, applies color and generates app-icon container previews. Every round produces a review page with the images, the design rationale and the prompts. Use when the user wants to make or revise a logo, or asks why a logo does not feel modern or premium enough. Works in any language; reply in the user's language.
 ---
 
 # Modern Logo Design
 
-核心定位：把用户感性、发散、具象的品牌需求，翻译成具备**包豪斯必然性、现代数学秩序、高阶曲率张力与操作系统级质感**的 logo。翻译的依据是 `references/skeleton_axioms.md` 里的三条公理：形式的必然性、数学秩序（模数、布尔构造、连续曲率、质心平衡）、负向防御。同一套公理既用来推导和写提示词，也用来诊断生成图。
+Core purpose: translate the user's emotional, divergent, concrete brand ideas into a logo with **Bauhaus inevitability, modern mathematical order, high-order curvature tension and OS-grade craft**. The translation rests on the three axioms in `references/skeleton_axioms.md`: formal inevitability, mathematical order (module, boolean construction, continuous curvature, center-of-mass balance) and negative defense. The same axioms are used to derive directions, write prompts and diagnose generated images.
 
-整个流程：**先骨架，后颜色**。
+**Reply in the user's language.** The instructions in this file are in English; the conversation, design rationales and review-page text follow the user.
 
-- **骨架**是 logo 的身份。去掉所有颜色、光效和背景，单色也必须成立。
-- **颜色**是骨架锁定后，用用户选定的颜色对骨架做的修饰，前提是不破坏骨架。
+The whole process: **skeleton first, color later**.
 
-骨架阶段绝不引入颜色，骨架没锁定之前不上色。这条规则来自实战：颜色问题常常是骨架问题的伪装（「黑色太重」其实是线宽不统一），先上色会把两类问题搅在一起，越改越乱。
+- The **skeleton** is the identity of the logo. Strip away all color, lighting and background; it must still hold up in a single color.
+- **Color** is a finishing layer applied to a locked skeleton, using the colors the user chose, as long as it does not damage the skeleton.
 
-## 参考文档
+Never introduce color during the skeleton stage, and never color before the skeleton is locked. This rule comes from practice: color problems are often skeleton problems in disguise ("the black is too heavy" is really an inconsistent stroke width). Coloring first mixes the two kinds of problem together, and every fix makes things worse.
 
-| 何时读 | 文件 |
+## References
+
+| When to read | File |
 |---|---|
-| 阶段 2 推导方向、阶段 3 诊断时（核心） | `references/skeleton_axioms.md` |
-| 阶段 3.5 重绘 SVG 时 | `references/svg_redraw.md` |
-| 阶段 4 上色时 | `references/color_dressing.md` |
-| 每次写提示词时 | `references/prompt_templates.md` |
+| Stage 2 (deriving directions) and stage 3 (diagnosis); the core document | `references/skeleton_axioms.md` |
+| Stage 3.5 (redrawing as SVG) | `references/svg_redraw.md` |
+| Stage 4 (coloring) | `references/color_dressing.md` |
+| Every time you write a prompt | `references/prompt_templates.md` |
 
-## 流程总览
+## Process overview
 
 ```
-阶段 0    环境准备        检查图像 API；没配好就引导配置，不往下走
-阶段 1    信息收集        产品名、品类、想表达什么、标志类型
-阶段 2    单色骨架矩阵    推导 3–4 个方向 → 单色出图 → 对照页
-阶段 3    选定与微调      诊断 → 局部调整 → 用户锁定 1 个骨架
-阶段 3.5  SVG 重绘        Claude 按公理把骨架重绘成精确矢量（推荐，可跳过）
-阶段 4    上色与交付      色彩诊断 → 角色分配 → A/B/C 三种范式 → 容器预览
+Stage 0    Setup              Check the image API; if it is not configured, guide the user and stop
+Stage 1    Brief              Product name, category, what to express, mark type
+Stage 2    Monochrome matrix  Derive 3–4 directions → monochrome images → review page
+Stage 3    Select & refine    Diagnose → local tweaks → the user locks 1 skeleton
+Stage 3.5  SVG redraw         Claude redraws the skeleton as precise vector by the axioms (recommended, skippable)
+Stage 4    Color & deliver    Color diagnosis → role assignment → A/B/C schemes → container preview
 ```
 
-图像模型负责「探索意象」（阶段 2、3），Claude 负责「精确落地」（阶段 3.5、4）。
+Image models handle "exploring imagery" (stages 2 and 3). Claude handles "precise execution" (stages 3.5 and 4).
 
-每个阶段结束都要用户确认才进下一阶段。用户随时可以退回上一阶段。
+At the end of every stage, wait for the user's confirmation before moving on. The user can step back to an earlier stage at any time.
 
 ---
 
-## 阶段 0：环境准备
+## Stage 0: Setup
 
-**运行本 skill 的任何脚本时**：skill 目录下有 `.venv` 就用 `<skill目录>/.venv/bin/python`（Windows 为 `.venv\Scripts\python`），没有才用 `python3`。依赖装在 `.venv` 里，用系统 Python 会报缺少依赖。下文命令里的 `python` 都按这条替换。
+**Whenever you run a script from this skill**: if the skill directory contains a `.venv`, use `<skill dir>/.venv/bin/python` (on Windows, `.venv\Scripts\python`); otherwise use `python3`. Dependencies are installed in `.venv`, so the system Python reports missing packages. Read every `python` in the commands below with this rule applied.
 
-本会话第一次出图前运行：
+Before the first image generation in a session, run:
 
 ```bash
-python <skill目录>/scripts/check_env.py
+python <skill dir>/scripts/check_env.py
 ```
 
-- 看到「环境就绪」：继续。
-- 有 ✗：不要调用出图脚本。把要做的事告诉用户：
+- If you see "Environment ready": continue.
+- If there is a ✗: do not call the generation script. Tell the user what to do:
   1. `pip install -r requirements.txt`
   2. `cp .env.example .env`
-  3. 在 `.env` 里设置 `IMAGE_PROVIDER`（gemini / openai / doubao），填那一家的 `*_API_KEY`；用中转时再填 `*_API_BASE_URL`
-  4. 再运行一次 `check_env.py`
+  3. In `.env`, set `IMAGE_PROVIDER` (gemini / openai / doubao) and fill in that provider's `*_API_KEY`; if using a relay, also fill in `*_API_BASE_URL`
+  4. Run `check_env.py` again
 
-**用户的 key 只写进 `.env`，不要在对话里复述，也不要写进任何其他文件。**
+**The user's key goes only into `.env`. Never repeat it in the conversation or write it to any other file.**
 
-## 阶段 1：信息收集
+## Stage 1: Brief
 
-一次只问一轮，问题要短。已经能从上下文知道的不要再问。
+Ask in a single round, with short questions. Do not ask about anything you can already tell from the context.
 
-1. **名称**（必填）
-2. **品类与场景**：做什么的、给谁用
-3. **想传达什么**：一两个关键词（如：成长、思考、连接、效率）
-4. **标志类型**：字母标（用哪个字母）/ 纯符号 / 字标 / 不确定（由你推荐）
-5. **已有素材**（可选）：现有 logo、产品界面截图、参考图
+1. **Name** (required)
+2. **Category and context**: what it does and who it is for
+3. **What to convey**: one or two keywords (e.g. growth, thinking, connection, efficiency)
+4. **Mark type**: letter mark (which letter) / pure symbol / wordmark / unsure (you recommend)
+5. **Existing material** (optional): current logo, product screenshots, reference images
 
-**这一阶段不主动问颜色。** 用户在前期给了颜色，出图时可以直接用上。如果颜色干扰了形状判断、效果不好，就改回单色，或者阶段 4 继续优化颜色。
+**Do not proactively ask about color at this stage.** If the user gave colors upfront, use them when generating. If color gets in the way of judging the shape, switch back to monochrome, or keep refining color in stage 4.
 
-有产品界面截图时，先看截图：产品是安静的、人文的，还是高能的、工具型的，会影响方向选择和后面的颜色。
+If there are product screenshots, look at them first. Whether the product is quiet and humanistic or high-energy and tool-like affects the choice of directions and, later, the colors.
 
-## 阶段 2：单色骨架矩阵
+## Stage 2: Monochrome skeleton matrix
 
-先读 `references/skeleton_axioms.md`。
+Read `references/skeleton_axioms.md` first.
 
-### 2.1 推导方向
+### 2.1 Derive directions
 
-推导 **3–4 个结构上截然不同**的方向，不是同一结构换参数。每个方向写清：
+Derive **3–4 structurally distinct** directions, not one structure with different parameters. For each direction, state:
 
-- **意象降维**：把概念提炼成什么动势（如：成长 → 自下而上的单一曲率）
-- **结构**：用什么基础形状、怎么组合（布尔加减、对称方式）
-- **闭合还是开放**，以及为什么（按公理文档的判断顺序）
-- **风险**：这个方向最可能在哪里翻车
+- **Imagery reduction**: what motion the concept is distilled into (e.g. growth → a single upward curvature)
+- **Structure**: which base shapes and how they combine (boolean add/subtract, symmetry)
+- **Closed or open**, and why (following the decision order in the axioms document)
+- **Risk**: where this direction is most likely to fail
 
-先把方向用文字列给用户看，问一句「按这几个方向出图吗」。用户说直接出图时跳过确认。
+List the directions to the user in text and ask "Shall I generate images for these directions?" Skip the confirmation if the user said to go straight to images.
 
-### 2.2 出图
+### 2.2 Generate images
 
-按 `references/prompt_templates.md` 的骨架模板写中英文提示词，**单色、纯平、无渐变、无光效**。每个方向出 1 张（用户要求更多再加）。出图前告诉用户本轮要生成几张，会消耗 API 额度。
+Write the prompts from the skeleton template in `references/prompt_templates.md`: **monochrome, flat, no gradients, no lighting effects**. Generate 1 image per direction (more if the user asks). Before generating, tell the user how many images this round will produce and that it uses API quota.
 
 ```bash
 python scripts/generate_image.py --name A1 --stage skeleton \
-  --direction "A · 方向名" --rationale-file A1.why.txt \
+  --direction "A · direction name" --rationale-file A1.why.txt \
   --prompt-file A1.en.txt --prompt-zh-file A1.zh.txt
 ```
 
-长文本一律写进临时文件再传 `--*-file`，避免命令行转义问题。
+`--prompt-file` is the English prompt sent to the model. `--prompt-zh-file` is an optional translation of it into the user's language, stored for display on the review page (the flag keeps its historical name).
 
-### 2.3 对照页
+Always put long text in a temporary file and pass it with `--*-file`, to avoid command-line escaping problems.
+
+### 2.3 Review page
 
 ```bash
-python scripts/build_review.py --names A1 B1 C1 --title "<名称> · 骨架第 1 轮" \
-  --goal "<本轮目标>" --out output/<名称>-round1.html
+python scripts/build_review.py --names A1 B1 C1 --title "<name> · Skeleton round 1" \
+  --goal "<goal of this round>" --out output/<name>-round1.html
 ```
 
-把对照页交给用户（能发布网页就发布，否则发 HTML 文件）。对话里只写每个方向一句话的判断和你的推荐，不重复页面内容。
+Hand the review page to the user (publish it as a web page if you can, otherwise send the HTML file). In the conversation, write only a one-sentence judgment per direction and your recommendation; do not repeat the page.
 
-**你看到生成图后要先自己按公理诊断一遍**：模型经常画不出提示词要的结构（比如要两张卡片，画成了一根管子）。如实说出哪里没画出来，不要把生成结果说得比实际好。
+**After you see the generated images, first diagnose them yourself against the axioms.** Models often fail to draw the structure the prompt asks for (for example, two cards drawn as one tube). Say honestly what was not drawn; do not describe the result as better than it is.
 
-## 阶段 3：选定与微调
+## Stage 3: Select and refine
 
-1. 用户选一个方向，或提出意见。先复述：「你认可的是 X，要改的是 Y」。
-2. 按 `skeleton_axioms.md` 的诊断顺序找出 1–3 个关键问题，每个写「看起来像什么 → 违反哪条公理 → 改法」。
-3. 每轮只改一个变量。用上一轮选中的图作为 `--ref`，在提示词里写清楚保留什么、只改什么。负向词按公理三调整：针对上一轮掉进的那一侧加词，另一侧保留，防止矫枉过正。
-4. 用 `make_preview.py` 看小尺寸：
+1. The user picks a direction or gives feedback. Restate it first: "What you approve is X; what you want to change is Y."
+2. Following the diagnosis order in `skeleton_axioms.md`, find 1–3 key problems. For each, write "what it looks like → which axiom it violates → the fix".
+3. Change only one variable per round. Use the image the user picked last round as `--ref`, and state clearly in the prompt what to keep and what to change. Adjust negative words by axiom three: add words against the side the last round fell to and keep the other side, so the fix does not overcorrect.
+4. Check small sizes with `make_preview.py`:
    ```bash
    python scripts/make_preview.py output/A2.png
    ```
-   16px、32px 认不出来的骨架不能锁定。
-5. 用户明确说「骨架定了」才往下走。把锁定的图记为骨架基准（如 `A3.png`）。
+   A skeleton that is unrecognizable at 16px or 32px cannot be locked.
+5. Move on only when the user explicitly says the skeleton is settled. Record the locked image as the skeleton baseline (e.g. `A3.png`).
 
-用户说「舒服但说不清」时，先找出舒服来自哪条公理，保住它再改别处。
+When the user says it "feels right but can't say why", first find which axiom the comfort comes from, protect it, then change other things.
 
-## 阶段 3.5：SVG 重绘
+## Stage 3.5: SVG redraw
 
-先读 `references/svg_redraw.md`。
+Read `references/svg_redraw.md` first.
 
-1. 问用户：「要不要把这个骨架重绘成精确的 SVG？之后上色直接用色值，形状不会再变。」只想先看个效果时可以跳过，直接到阶段 4 用图像模型上色。
-2. 按画法约定写 SVG：1024 画布，图层 id 固定为 `bg` / `skeleton` / `focus`，开头注释写清模数 w 和圆角等基准值，转角按 G² 规则画（不用纯圆弧转角），布尔减法用 `mask`、交集用 `clipPath`。
-3. 渲染并与原图对比：
+1. Ask the user: "Shall I redraw this skeleton as a precise SVG? Coloring can then use exact color values and the shape will not change." If they only want a quick look, skip this and color with the image model in stage 4.
+2. Write the SVG by the drawing conventions: a 1024 canvas, layer ids fixed as `bg` / `skeleton` / `focus`, an opening comment stating the module w, corner radii and other base values, corners drawn by the G² rule (no plain circular-arc corners), boolean subtraction with `mask` and intersection with `clipPath`.
+3. Render it and compare with the original:
    ```bash
    python scripts/render_svg.py output/A3.svg --source output/A3.png \
-     --name A3-svg --direction "A3 · SVG 重绘" --rationale "<模数与修正点>"
+     --name A3-svg --direction "A3 · SVG redraw" --rationale "<module and corrections>"
    ```
-   打开 `A3-svg-compare.png` 看叠加图：红 = 只在原图，青 = 只在 SVG。按「位置 → 比例 → 细节」逐轮修正，通常 2–3 轮。
-4. 对渲染图运行 `make_preview.py` 看小尺寸。
-5. 把原图和重绘图放进对照页给用户，说明修正了哪些不规整。用户确认后，这个 SVG 就是最终骨架。
+   Open `A3-svg-compare.png` and read the overlay: red = only in the original, cyan = only in the SVG. Correct in the order "position → proportion → detail", usually 2–3 rounds.
+4. Run `make_preview.py` on the rendered image to check small sizes.
+5. Put the original and the redraw on the review page and explain which irregularities you corrected. Once the user confirms, this SVG is the final skeleton.
 
-## 阶段 4：上色与交付
+## Stage 4: Color and deliver
 
-先读 `references/color_dressing.md`。
+Read `references/color_dressing.md` first.
 
-用户给出色值后一次做完下面几步，不要一问一答。只有角色分配有歧义时才先问。
+Once the user gives color values, do all the following steps in one go instead of asking one question at a time. Ask first only if the role assignment is ambiguous.
 
-1. **收集颜色**：2–4 个色值。阶段 1 已给过的先沿用，效果不好就在这一步调整。用户没有颜色时，根据产品界面推荐 2–3 组，每组说明理由，由用户选。
-2. **色彩诊断**：
+1. **Collect colors**: 2–4 color values. Colors already given in stage 1 are used first; if they do not work, adjust them in this step. If the user has no colors, recommend 2–3 sets based on the product screenshots, each with its reasoning, and let the user choose.
+2. **Color diagnosis**:
    ```bash
    python scripts/color_check.py "#211811" "#FFF5EF" "#FF7622"
    ```
-   整理成诊断表：每个颜色适合做什么，哪些不能做细线，哪些在桌面上会融化，哪些能做渐变。
-3. **角色分配**：Canvas 底板 / Structure 骨架 / Accent 焦点。颜色数由骨架决定：骨架只有一个整体形状时默认 2 色（底板 + 骨架），只有骨架里有本来就独立的部件时才加焦点色。骨架自带容器（实心方块 + 负空间）时，容器就是图标底板，不要再套一层，避免方框套方框。
-4. **范式出图**：A 柔和轻量（浅底）、B 深邃聚焦（深底反白）、C 高能唤起（亮色底）。只出颜色撑得起的范式：A/B 需要一深一浅，C 需要一个与骨架色对比度 ≥ 3:1 的高彩色。用户要渐变时按渐变规则做。
-   - **有 SVG（推荐）**：每种范式一条 `render_svg.py --colors` 命令，不调用 API、形状不变。渐变由 Claude 在 SVG 里写 `<linearGradient>`。
-   - **没有 SVG**：用图像模型，以锁定的骨架图作为 `--ref`，提示词明确「形状完全不变，只改颜色」。模型可能悄悄改动形状，要对照骨架图检查。
-5. **检查**：四条不伤骨架 + 工程清单（对比度、文字叠加、浅底内描边、深色模式、最小尺寸降级）。
-6. **容器预览**：每个范式分别运行 `make_preview.py`。
-7. **对照页**：诊断结论、各范式、预览放进同一页，让用户挑主版本。
-8. **展示图（可选）**：用户需要宣传图时，把成品 PNG 作为参考图交给图像模型（`prompt_templates.md` 第 4 节）。logo 本体保持纯平。
-9. **交付**：单色 SVG、各范式的彩色 SVG 和 PNG（主版本 + B 作为深色模式和反白版）、预览图、最终对照页，告诉用户文件在哪。
+   Organize the result into a diagnosis table: what each color is good for, which ones cannot be used for thin lines, which ones melt into the desktop, which ones can carry a gradient.
+3. **Role assignment**: Canvas (base) / Structure (skeleton) / Accent (focus). The skeleton decides the number of colors: if it is a single overall shape, default to 2 colors (canvas + structure); add an accent color only if the skeleton has parts that are genuinely independent. If the skeleton brings its own container (a solid square with negative space), that container is the icon base; do not wrap another layer around it, to avoid a box inside a box.
+4. **Scheme images**: A soft and light (light background), B deep and focused (dark background, reversed), C high-energy and striking (bright background). Produce only the schemes the colors can support: A/B need one dark and one light color; C needs a highly saturated color with at least 3:1 contrast against the skeleton color. If the user wants a gradient, follow the gradient rules.
+   - **With an SVG (recommended)**: one `render_svg.py --colors` command per scheme, no API call, the shape does not change. Claude writes the `<linearGradient>` in the SVG for gradients.
+   - **Without an SVG**: use the image model with the locked skeleton image as `--ref`, and state explicitly in the prompt "the shape stays exactly the same, only the colors change". The model may quietly alter the shape, so check against the skeleton image.
+5. **Checks**: the four rules that protect the skeleton, plus the engineering checklist (contrast, text overlay, inner stroke on light backgrounds, dark mode, minimum-size fallback).
+6. **Container preview**: run `make_preview.py` for each scheme.
+7. **Review page**: put the diagnosis, the schemes and the previews on one page so the user can pick the main version.
+8. **Showcase image (optional)**: if the user wants a promotional image, hand the finished PNG to the image model as a reference (section 4 of `prompt_templates.md`). The logo itself stays flat.
+9. **Deliver**: monochrome SVG, color SVGs and PNGs for each scheme (main version, plus B as the dark-mode and reversed version), the previews and the final review page; tell the user where the files are.
 
 ---
 
-## 沟通原则
+## Communication principles
 
-- 用户的描述常常是感受（太硬、太柔、不现代、脏）。先翻译成具体的公理问题，再动手。
-- 每轮先说保留什么，再说改什么。
-- 没把握的方向，用 2–3 个具体选项问用户，不要连续猜。
-- 每次出图前说清张数；不要一次出太多。
-- 只有真正调用脚本成功后，才说「已生成」。
+- The user's descriptions are often feelings (too hard, too soft, not modern, dirty). Translate them into concrete axiom problems before acting.
+- In each round, say what stays before saying what changes.
+- When you are unsure of a direction, ask the user with 2–3 concrete options instead of guessing repeatedly.
+- Say how many images you will generate before each generation, and do not generate too many at once.
+- Say "generated" only after a script has actually run successfully.
 
-## 脚本
+## Scripts
 
-| 脚本 | 用途 | 调用 API |
+| Script | Purpose | Calls an API |
 |---|---|---|
-| `scripts/check_env.py` | 检查环境与 key（`--all` 看三家状态） | 只做验证，不出图 |
-| `scripts/generate_image.py` | 出图，记录提示词与阐述到同名 `.json` | 是 |
-| `scripts/build_review.py` | 生成「图 + 阐述 + 中英文提示词」对照页 | 否 |
-| `scripts/render_svg.py` | 渲染 SVG、与原图对比、按图层上色 | 否 |
-| `scripts/color_check.py` | 色彩诊断：明度、彩度、冷暖、对比度、渐变可行性 | 否 |
-| `scripts/make_preview.py` | App 图标容器预览（浅色 / 深色 / 多尺寸） | 否 |
+| `scripts/check_env.py` | Check the environment and keys (`--all` shows all three providers) | Validation only, no images |
+| `scripts/generate_image.py` | Generate images; records prompts and rationale in a sibling `.json` | Yes |
+| `scripts/build_review.py` | Build the review page: images + rationale + prompts | No |
+| `scripts/render_svg.py` | Render an SVG, compare with the original, color by layer | No |
+| `scripts/color_check.py` | Color diagnosis: lightness, chroma, warmth, contrast, gradient feasibility | No |
+| `scripts/make_preview.py` | App-icon container preview (light / dark / multiple sizes) | No |
 
-`generate_image.py` 常用参数：`--provider` 临时换模型、`--ref` 参考图（可重复）、`--aspect` 画幅、`--n` 张数、`--dry-run` 只看请求不调用。
+Common `generate_image.py` options: `--provider` to switch model for one run, `--ref` for reference images (repeatable), `--aspect` for aspect ratio, `--n` for the number of images, `--dry-run` to inspect the request without calling the API.

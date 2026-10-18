@@ -1,9 +1,9 @@
-"""图像模型适配层。每个模块提供：
+"""Image-provider adapter layer. Each module provides:
 
     generate(prompt, refs, aspect, size, quality) -> GenResult
-    verify() -> str            # 在线验证，不出图；不支持时抛 NotImplementedError
+    verify() -> str            # online validation, no image generated; raises NotImplementedError if unsupported
 
-refs 为空 = 文生图；有参考图 = 以参考图为基础修改（上色阶段锁定骨架）。
+Empty refs = text-to-image; with reference images = edit based on them (locks the skeleton in the coloring stage).
 """
 from __future__ import annotations
 
@@ -13,8 +13,8 @@ from importlib import import_module
 
 @dataclass
 class GenResult:
-    images: list[tuple[bytes, str]] = field(default_factory=list)  # (数据, mime)
-    texts: list[str] = field(default_factory=list)                 # 模型附带的文字回复
+    images: list[tuple[bytes, str]] = field(default_factory=list)  # (data, mime)
+    texts: list[str] = field(default_factory=list)                 # text replies attached by the model
 
 
 def load(name: str):

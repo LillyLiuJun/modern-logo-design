@@ -1,193 +1,193 @@
-# 上色：在锁定的骨架上装配颜色
+# Coloring: Dressing a Locked Skeleton in Color
 
-颜色是对骨架的修饰。颜色由用户决定；这份文档管两件事：
+Color is a finishing layer on the skeleton. The user decides the colors; this document covers two things:
 
-- **颜色本身的工程性**：哪个颜色能做什么、在什么背景上会出问题。
-- **颜色和骨架的关系**：怎么上色才不伤骨架。
+- **The engineering of color itself**: what each color can do, and on which backgrounds it runs into trouble.
+- **The relation between color and skeleton**: how to color without damaging the skeleton.
 
-前提：骨架已经锁定，单色版成立。
+Precondition: the skeleton is locked and its monochrome version holds up.
 
-用户给出色值后，不要一问一答地推进。按下面的顺序一次做完：诊断 → 角色分配 → 范式出图 → 对照页让用户挑。只有分配方案有歧义时才先问。
+Once the user gives color values, do not proceed one question at a time. Do everything in this order: diagnosis → role assignment → scheme images → a review page for the user to choose. Ask first only if the assignment is ambiguous.
 
-## 目录
+## Contents
 
-1. 输入与色彩诊断
-2. 角色分配
-3. 三种范式 × 上色方式
-4. 检查
-5. 常见翻车
-6. 容器预览与交付
+1. Input and color diagnosis
+2. Role assignment
+3. Three schemes × coloring methods
+4. Checks
+5. Common failures
+6. Container preview and delivery
 
 ---
 
-## 1. 输入与色彩诊断
+## 1. Input and color diagnosis
 
-### 输入
+### Input
 
-- **2–4 个色值**（如 `#211811`、`#FFF5EF`、`#FF7622`）。只有描述（「深紫」「暖橙」）时，给 2–3 个候选色值让用户选。
-- **上色方式偏好**（可选）：纯色、双色、渐变。没说就按第 3 节默认。
-- **产品定位**（可选）：没给就按全场景考虑。
+- **2–4 color values** (e.g. `#211811`, `#FFF5EF`, `#FF7622`). If there are only descriptions ("deep purple", "warm orange"), give 2–3 candidate values for the user to choose from.
+- **Coloring-method preference** (optional): solid, two-color, gradient. If not stated, use the defaults in section 3.
+- **Product positioning** (optional): if not given, consider all scenarios.
 
-用户没有颜色时：
+If the user has no colors:
 
-- 有产品界面截图，就从界面里取：主色、强调色、背景色。
-- 推荐 2–3 组，每组说清楚理由，由用户选。
-- 避免撞上知名品牌的标志色（例如 Slack 的深紫 #4A154B）。
+- If there are product screenshots, take colors from the interface: primary, accent, background.
+- Recommend 2–3 sets, each with a clear reason, and let the user choose.
+- Avoid colliding with the signature color of a well-known brand (for example Slack's deep purple #4A154B).
 
-### 诊断
+### Diagnosis
 
 ```bash
 python scripts/color_check.py "#211811" "#FFF5EF" "#FF7622"
 ```
 
-脚本输出每个颜色的明度、彩度、色相、冷暖，对浅色和深色桌面的对比度，两两对比度，以及色相间距。把结果整理成一张诊断表给用户，重点说清楚**工程缺陷**：
+The script outputs each color's lightness, chroma, hue and warmth, its contrast against light and dark desktops, the pairwise contrast, and the hue spacing. Organize the result into a diagnosis table for the user, focusing on the **engineering defects**:
 
-| 要回答的问题 | 看什么 |
+| Question to answer | What to look at |
 |---|---|
-| 哪个颜色适合做大面积底板 | 明度高或低、彩度低的颜色；高彩色大面积会浮躁 |
-| 哪个颜色能做骨架 | 和底板对比度 ≥ 3:1，深浅反差最大的那一对 |
-| 哪个颜色只能做焦点 | 高彩中明度的颜色；和浅色对比常常不足 |
-| 哪个颜色不能做细线前景 | 和它所在底色对比度 < 3:1 |
-| 哪个颜色在桌面上会「融化」 | 对浅色桌面或深色桌面对比度 < 1.5，做底板时边界看不清 |
-| 哪两个颜色能做渐变 | 色相差 ≤ 30°；接近互补的不能 |
-| 有没有纯黑 | 纯黑 #000000 建议换成带色相的深色（如暖调深咖黑 #17120C） |
+| Which color suits a large base | Colors with high or low lightness and low chroma; a high-chroma color over a large area feels restless |
+| Which color can be the skeleton | At least 3:1 contrast with the base; the pair with the greatest light/dark difference |
+| Which color can only be the accent | High-chroma, mid-lightness colors; contrast with light colors is often insufficient |
+| Which color cannot be a thin-line foreground | Contrast below 3:1 against the color it sits on |
+| Which color "melts" on the desktop | Contrast below 1.5 against a light or dark desktop, so the edge is unclear when used as the base |
+| Which two colors can make a gradient | Hue difference ≤ 30°; near-complementary colors cannot |
+| Is there pure black | Replace pure black #000000 with a dark color that has a hue (such as warm dark coffee-black #17120C) |
 
 ---
 
-## 2. 角色分配
+## 2. Role assignment
 
-| 角色 | 作用 | 通常的颜色 | 面积 |
+| Role | Function | Usual color | Area |
 |---|---|---|---|
-| **Canvas 底板** | 大面积承载，决定第一感受。App 图标的方块底色 | 很浅或很深、彩度低 | 最大 |
-| **Structure 骨架** | 主结构、外轮廓、闭环；保障极小尺寸的辨识度 | 与底板反差最大的颜色 | 中 |
-| **Accent 焦点** | 第一眼落点，控制视线流向 | 品牌强调色，高纯度 | 小，约 10% |
+| **Canvas** (base) | Carries the large area and decides the first impression. The square base color of the app icon | Very light or very dark, low chroma | Largest |
+| **Structure** (skeleton) | Main structure, outer contour, closed loop; secures recognizability at tiny sizes | The color with the greatest contrast against the base | Medium |
+| **Accent** (focus) | The first point the eye lands on; controls the flow of the gaze | The brand accent color, high saturation | Small, about 10% |
 
-### 颜色数量由骨架决定，不是固定三个
+### The number of colors is decided by the skeleton, not fixed at three
 
-三个角色是上限，不是要求。先数骨架里有几个能独立上色的部分，再决定用几个颜色：
+Three roles is a ceiling, not a requirement. First count how many parts of the skeleton can be colored independently, then decide how many colors to use:
 
-| 骨架 | 颜色数 | 分配 |
+| Skeleton | Colors | Assignment |
 |---|---|---|
-| 只有一个整体形状（大多数字母标、负空间标） | **2 色（默认）** | 底板 + 骨架 |
-| 有一个本来就独立的部件（如 P 字怀里的芽芯） | 3 色 | 底板 + 骨架 + 焦点 |
-| 需要极简、权威感，或用在印章、单色印刷场景 | 1 色 | 骨架一种颜色，底板透明或跟随环境 |
+| Only one overall shape (most letter marks and negative-space marks) | **2 colors (default)** | Canvas + structure |
+| One genuinely independent part (such as the sprout core inside the counter of a P) | 3 colors | Canvas + structure + accent |
+| Needs to be minimal and authoritative, or used for stamps and one-color printing | 1 color | One color for the skeleton, base transparent or following the environment |
 
-用户给了 3 个颜色、但骨架只有一个整体形状时，**不要硬塞第三个颜色**。多出来的颜色用在不同范式里（比如亮色只在范式 C 里做底板），而不是在同一个图标里叠出新的层。
+If the user gave 3 colors but the skeleton has only one overall shape, **do not force in a third color**. Use the extra color in a different scheme (for example, the bright color is the base only in scheme C), rather than stacking a new layer in the same icon.
 
-### 符号和容器不要重复
+### Do not duplicate the symbol and the container
 
-App 图标本身已经有一个圆角方块容器（系统的超椭圆）。如果骨架**自己就是「实心容器 + 负空间」**（比如圆角方块里切出 S），做成 App 图标时：
+An app icon already has a rounded-square container (the system squircle). If the skeleton **is itself a "solid container + negative space"** (for example an S cut out of a rounded square), then when making the app icon:
 
-- **容器就是图标的底板**。负空间形状直接从底板里切出来，或者直接画在底板上。
-- **不要**在底板颜色上再放一个骨架颜色的方块。那样会出现「方框套方框」：外面一层底板、里面一层骨架方块，两层容器争主次，形状本身反而变小。
+- **The container is the base of the icon.** The negative-space shape is cut out of the base, or drawn directly on it.
+- **Do not** put a skeleton-colored square on top of the base color. That gives a "box inside a box": a layer of base outside and a layer of skeleton square inside, two containers fighting over which is primary, and the shape itself gets smaller.
 
-只有骨架是开放的、不带自身容器的形状（如一个 P、一个星芒）时，底板才是骨架之外独立的一层。
+Only when the skeleton is an open shape without its own container (such as a P or a starburst) is the base a separate layer outside the skeleton.
 
-判断方法：去掉底板颜色，骨架里是否还剩一个和图标容器形状相似的外框？剩下了，就说明符号和容器重复了。
+How to judge: remove the base color. Does the skeleton still contain an outer frame similar in shape to the icon container? If so, the symbol and the container are duplicated.
 
-### 角色必须对应骨架的结构
+### Roles must correspond to the structure of the skeleton
 
-不是随手涂：
+Do not color casually:
 
-- 只有骨架里本来就是**独立的布尔部件**，才能单独上焦点色。比如芽芯是独立的形状，才能涂橙色；如果它和外壳是同一笔画，硬分两色会把一笔切成两段。
-- 焦点色的面积宁少勿多。焦点色铺满外圈，主次会被打乱。
-- 没有职责的颜色就是杂色，删掉。
+- Only a part that is already an **independent boolean part** in the skeleton can have its own accent color. For example, the sprout core can be orange because it is an independent shape; if it is the same stroke as the shell, forcing two colors would cut one stroke into two segments.
+- Keep the accent area small rather than large. If the accent color fills the outer ring, the primary/secondary order is disturbed.
+- A color with no job is a stray color; delete it.
 
-有 SVG 时，角色直接对应图层：Canvas = `bg`，Structure = `skeleton`，Accent = `focus`。
+With an SVG, roles map directly to layers: Canvas = `bg`, Structure = `skeleton`, Accent = `focus`.
 
 ---
 
-## 3. 三种范式 × 上色方式
+## 3. Three schemes × coloring methods
 
-### 三种范式（谁做底、谁做主）
+### Three schemes (who is the base, who is primary)
 
-| 范式 | 底板 | 骨架 | 焦点 | 气质 | 适合 |
+| Scheme | Base | Skeleton | Accent | Character | Suited to |
 |---|---|---|---|---|---|
-| **A 柔和轻量** | 浅色 | 深色 | 亮色点睛 | 纸质感、安静、人文 | 阅读、学习、工具类的默认版本 |
-| **B 深邃聚焦** | 深色 | 浅色反白 | 亮色作为视觉中心 | 高端、沉浸 | 深色模式、夜间场景、高端定位 |
-| **C 高能唤起** | 高饱和亮色 | 深色或浅色 | 用深浅互衬压住浮躁 | 品牌穿透力强 | 应用商店、营销场景、需要一眼认出 |
+| **A Soft and light** | Light | Dark | Bright color as a finishing touch | Paper feel, quiet, humanistic | Default version for reading, learning and tool apps |
+| **B Deep and focused** | Dark | Light, reversed | Bright color as the visual center | Premium, immersive | Dark mode, night scenes, premium positioning |
+| **C High-energy and striking** | Highly saturated bright color | Dark or light | Light/dark contrast to hold down restlessness | Strong brand penetration | App stores, marketing, needing to be recognized at a glance |
 
-- 范式只出**颜色能撑得起的那几种**，放进同一个对照页让用户比较：
-  - A 和 B 是一对深浅互换，只要有一深一浅两个颜色就都能出。B 同时就是反白版。
-  - C 需要一个高彩色，而且它和骨架色的对比度 ≥ 3:1。没有这样的颜色就不出 C。
-  - 2 色方案里，C 就是「高彩色做底板 + 深色或浅色做骨架」，不额外加第三层。
-- B 里的焦点色是「视觉中心」，不是发光体。logo 本身保持纯平，不加光晕。
-- C 的底板用高彩色，骨架和焦点之间要有明确的深浅反差；如果诊断显示亮色和浅色对比不足，C 的骨架就用深色。
+- Produce **only the schemes the colors can support**, and put them on the same review page for comparison:
+  - A and B are a light/dark swap of each other. Whenever there is one dark and one light color, both can be produced. B is also the reversed version.
+  - C needs a highly saturated color with at least 3:1 contrast against the skeleton color. If there is no such color, do not produce C.
+  - In a 2-color plan, C is "high-chroma color as the base + dark or light color as the skeleton", with no extra third layer.
+- The accent color in B is a "visual center", not a light source. The logo itself stays flat, with no glow.
+- C uses a high-chroma color as the base, and there must be a clear light/dark difference between the skeleton and the accent; if the diagnosis shows the bright color has insufficient contrast with light colors, use a dark skeleton for C.
 
-### 上色方式（颜色怎么涂在骨架上）
+### Coloring methods (how the color goes onto the skeleton)
 
-每种范式下，再选一种上色方式：
+Within each scheme, choose one coloring method:
 
-- **纯色**：骨架和焦点同色，整个 logo 一个颜色。最稳。
-- **双色分层**：骨架一个颜色，焦点一个颜色，色块硬边相接。最常用，默认用这个。
-- **渐变**：只在相近的颜色之间走。
-  - 同一色相内深浅变化（深橙 → 橙），或相邻色相（约 30° 以内）。
-  - 不在深冷灰或纯黑与鲜艳暖色之间拉长渐变，中间会发灰、发焦。
-  - 不跨互补色（橙 → 蓝），中间会出现灰色死区。
-  - 渐变方向顺着骨架的动势（成长类从下往上变亮）。
-  - 暗部用带色相的深色，不用纯黑。
+- **Solid**: the skeleton and accent share one color, the whole logo is one color. The most stable.
+- **Two-color layers**: one color for the skeleton, one for the accent, with hard edges between the blocks. The most common, and the default.
+- **Gradient**: only between close colors.
+  - A light/dark change within one hue (dark orange → orange), or between adjacent hues (within about 30°).
+  - Do not stretch a gradient between deep cool grey or pure black and a vivid warm color; the middle goes grey and burnt.
+  - Do not cross complementary colors (orange → blue); a grey dead zone appears in the middle.
+  - The gradient direction follows the momentum of the skeleton (for growth, brighter from bottom to top).
+  - Use a dark color with a hue for the dark end, not pure black.
 
-### 怎么出图
+### How to produce the images
 
-- **有 SVG（推荐）**：每种范式一条命令，颜色精确、形状不变：
+- **With an SVG (recommended)**: one command per scheme, with exact colors and an unchanged shape:
   ```bash
-  # 3 色（骨架有独立的焦点部件时）
+  # 3 colors (when the skeleton has an independent accent part)
   python scripts/render_svg.py output/A3.svg --name A3-A --stage color \
-    --direction "范式 A · 柔和轻量" --colors "bg=#FFF5EF,skeleton=#211811,focus=#FF7622"
-  # 2 色（骨架只有一个整体形状时，不传 focus）
+    --direction "Scheme A · soft and light" --colors "bg=#FFF5EF,skeleton=#211811,focus=#FF7622"
+  # 2 colors (when the skeleton has only one overall shape; omit focus)
   python scripts/render_svg.py output/A3.svg --name A3-C --stage color \
-    --direction "范式 C · 高能唤起" --colors "bg=#FF7622,skeleton=#211811"
+    --direction "Scheme C · high-energy" --colors "bg=#FF7622,skeleton=#211811"
   ```
-  骨架自带容器时，先按 `svg_redraw.md` 的约定把容器改成满画布的 `bg`，再上色。
-  渐变由 Claude 直接在 SVG 里写 `<linearGradient>`，再用 `render_svg.py` 渲染。
-- **没有 SVG**：用图像模型，以锁定的骨架图作为 `--ref`（`prompt_templates.md` 第 3 节）。模型可能悄悄改动形状，要对照骨架图检查。
+  If the skeleton brings its own container, first turn the container into a full-canvas `bg` following `svg_redraw.md`, then color.
+  For gradients, Claude writes the `<linearGradient>` directly in the SVG, then renders with `render_svg.py`.
+- **Without an SVG**: use the image model with the locked skeleton image as `--ref` (section 3 of `prompt_templates.md`). The model may quietly alter the shape, so check against the skeleton image.
 
 ---
 
-## 4. 检查
+## 4. Checks
 
-### 四条不伤骨架
+### Four rules that protect the skeleton
 
-1. **骨架还完整吗？** 外轮廓有没有因为某段颜色太浅而看起来断掉？形状有没有被模型改动？
-2. **颜色顺着结构分了吗？** 有没有一笔被硬切成两色？焦点有没有被别的颜色抢走？
-3. **渐变干净吗？** 有没有发灰、发脏、发焦的中间段？有没有偏黄偏出品牌色？
-4. **单色还成立吗？** 彩色版是加分项，不能替代单色版。
+1. **Is the skeleton still intact?** Does the outer contour look broken because some segment is too light? Did the model change the shape?
+2. **Did the colors follow the structure?** Is any single stroke cut into two colors? Was the accent stolen by another color?
+3. **Is the gradient clean?** Any grey, dirty or burnt middle section? Any drift toward yellow away from the brand color?
+4. **Does the monochrome version still hold?** The color version is a bonus; it cannot replace the monochrome version.
 
-### 工程清单
+### Engineering checklist
 
-| 项 | 要求 |
+| Item | Requirement |
 |---|---|
-| **对比度** | 骨架对底板 ≥ 3:1；含文字的部分 ≥ 4.5:1。用 `color_check.py` 的两两对比度核对 |
-| **文字叠加** | 对比度 < 4.5:1 的组合不放文字；< 3:1 的组合不能互为前景和背景，只能相邻放置 |
-| **浅色底板的边界** | 诊断显示底板在浅色桌面会「融化」时，加一圈内描边：骨架色、透明度约 8–12%、宽度约为图标边长的 1/256（1024 画布约 4px）；或者在这个场景改用范式 B |
-| **深色模式** | 范式 A 的浅底在深色桌面上会很刺眼，深色模式用范式 B。较新的 iOS 支持单独的深色图标和着色图标；着色图标由系统转成灰度再染色，所以单色版骨架必须成立 |
-| **最小尺寸降级** | 通知、设置列表、浏览器标签的 16–24px 尺寸：渐变改纯色；去掉细于 2px 的细节和切缝；焦点部件太小会消失时，考虑并入骨架色。用 `make_preview.py` 看 16 / 32px |
+| **Contrast** | Skeleton against base ≥ 3:1; parts that contain text ≥ 4.5:1. Verify with the pairwise contrast from `color_check.py` |
+| **Text overlay** | Do not place text on combinations below 4.5:1; combinations below 3:1 cannot be foreground and background of each other, only placed adjacent |
+| **Edge of a light base** | If the diagnosis shows the base "melts" on a light desktop, add an inner stroke: skeleton color, about 8–12% opacity, about 1/256 of the icon edge in width (about 4px on a 1024 canvas); or use scheme B in that context |
+| **Dark mode** | The light base of scheme A is glaring on a dark desktop; use scheme B for dark mode. Newer iOS supports separate dark and tinted icons; tinted icons are converted to greyscale and re-tinted by the system, so the monochrome skeleton must hold up |
+| **Minimum-size fallback** | At 16–24px (notifications, settings lists, browser tabs): turn gradients into solid color; remove details and cuts thinner than 2px; if the accent part is so small it vanishes, consider merging it into the skeleton color. Check 16 / 32px with `make_preview.py` |
 
 ---
 
-## 5. 常见翻车
+## 5. Common failures
 
-| 症状 | 原因 | 修法 |
+| Symptom | Cause | Fix |
 |---|---|---|
-| 方框套方框 | 骨架自带容器（实心方块 + 负空间），又在外面加了一层底板色 | 骨架的容器直接作为图标底板，负空间从底板里切出 |
-| 颜色多但层次乱 | 为了用满 3 个颜色，硬加了没有结构依据的一层 | 按骨架的独立部件数决定颜色数，默认 2 色 |
-| 外圈看起来断了 | 外轮廓用了接近底板的浅色 | 外轮廓交给骨架色，浅色只放在内侧 |
-| 图标和桌面融成一片 | 底板与桌面对比度不足 | 内描边，或换范式 |
-| 像橡皮泥、创可贴 | 不透明的浅粉 + 立体倒角 | 去掉立体效果；浅色改为负空间 |
-| 发焦、像炭火 | 深色与鲜艳色长距离渐变 | 暗端用带色相的深色，缩短渐变距离 |
-| 发黄、像火苗 | 亮部往黄、金偏 | 亮部只在品牌色相内提亮，提示词写明不偏黄 |
-| 太硬像牢笼 | 深色面积过大，焦点被孤立 | 外硬内柔：外轮廓深色，内侧少量退让 |
-| 太柔不像 logo | 浅色占据外轮廓 | 外轮廓还给骨架色 |
-| 浮躁、刺眼 | 高彩色做了大面积底板却没有压住 | 范式 C 里用深色骨架压住；或改用范式 A/B |
-| 有冲击力但不克制 | 焦点色面积过大 | 焦点收回到 10% 左右 |
-| 像霓虹灯、电竞 | 加了发光、高光 | logo 本身保持纯平；光感属于展示环境 |
-| 花哨、像彩虹 | 加了用户给定以外的颜色 | 回到用户给定的颜色 |
+| Box inside a box | The skeleton brings its own container (solid square + negative space) and a layer of base color was added outside | Use the skeleton's container directly as the icon base; cut the negative space out of the base |
+| Many colors but a messy hierarchy | A layer with no structural basis was forced in to use all 3 colors | Decide the number of colors by the number of independent parts of the skeleton; default to 2 |
+| The outer ring looks broken | The outer contour used a light color close to the base | Give the outer contour to the skeleton color; place the light color only on the inside |
+| The icon melts into the desktop | Insufficient contrast between base and desktop | An inner stroke, or change scheme |
+| Looks like modeling clay or a plaster | An opaque light pink + 3D bevel | Remove the 3D effects; turn the light color into negative space |
+| Burnt, like charcoal | A long gradient between a dark color and a vivid color | A dark color with a hue at the dark end, and a shorter gradient |
+| Yellowish, like a flame | The highlights drift toward yellow and gold | Brighten within the brand hue only, and state "no shift toward yellow" in the prompt |
+| Too hard, like a cage | Too much dark area, the accent isolated | Hard outside, soft inside: dark outer contour, a little yielding on the inside |
+| Too soft to be a logo | A light color occupies the outer contour | Give the outer contour back to the skeleton color |
+| Restless, glaring | A high-chroma color used as a large base without being held down | In scheme C hold it down with a dark skeleton; or use scheme A/B |
+| Impactful but not restrained | The accent area is too large | Pull the accent back to about 10% |
+| Like neon or esports | Glow or highlights were added | Keep the logo itself flat; lighting belongs to the display environment |
+| Gaudy, like a rainbow | Colors beyond those the user gave were added | Return to the colors the user gave |
 
 ---
 
-## 6. 容器预览与交付
+## 6. Container preview and delivery
 
-对每个范式的成品分别运行：
+Run this on the final image of each scheme:
 
 ```bash
 python scripts/make_preview.py output/A3-A.png
@@ -195,8 +195,8 @@ python scripts/make_preview.py output/A3-B.png
 python scripts/make_preview.py output/A3-C.png
 ```
 
-生成浅色、深色两种桌面下的 App 图标效果，以及 180 / 64 / 32 / 16px 尺寸。不调用 API。
+It generates the app-icon appearance on light and dark desktops, and at 180 / 64 / 32 / 16px. It does not call an API.
 
-然后用 `build_review.py` 把诊断结论、各范式和预览放进同一个对照页，让用户挑主版本。交付时出过的范式都保留：用户选中的作为主版本，B 作为深色模式和反白版本。
+Then use `build_review.py` to put the diagnosis, the schemes and the previews on one review page for the user to pick the main version. On delivery, keep every scheme that was produced: the one the user picks is the main version, and B serves as the dark-mode and reversed version.
 
-光晕、磨砂、毛玻璃这些效果属于**展示环境**（App 图标容器、宣传页），不画进 logo 本身。用户需要展示图时可以单独生成，但交付的 logo 本体保持纯平。
+Effects like glow, frosting and frosted glass belong to the **display environment** (the app-icon container, promotional pages) and are not drawn into the logo itself. When the user needs a showcase image, generate one separately, but the delivered logo itself stays flat.

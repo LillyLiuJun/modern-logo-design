@@ -1,119 +1,119 @@
-# SVG 重绘：把锁定的骨架变成精确矢量
+# SVG Redraw: Turning the Locked Skeleton into Precise Vector
 
-图像模型输出的是位图，线宽、圆角、对称都只是「看起来差不多」。骨架锁定后，由 Claude 按骨架公理把它重绘成 SVG：
+Image models output bitmaps, in which stroke width, corner radius and symmetry are only "roughly right". Once the skeleton is locked, Claude redraws it as SVG by the skeleton axioms:
 
-- 线宽、圆角、间距真正统一到同一个模数；
-- 弧线来自真正的同心圆，对称是真正的对称；
-- 可以无限放大，可以直接交给开发和设计师；
-- 上色时按图层精确填色值，不再依赖模型「猜颜色」，形状也不会被模型改动。
+- Stroke width, corner radius and clearance are truly unified to one module.
+- Arcs come from true concentric circles, and symmetry is true symmetry.
+- It scales without limit and can be handed straight to developers and designers.
+- Coloring fills exact color values by layer, no longer relying on the model to "guess colors", and the model cannot change the shape.
 
-重绘不是描摹原图的每个像素。原图里的不规整（线宽忽粗忽细、圆角大小不一）正是要被修正的东西。
+A redraw does not trace every pixel of the original. The irregularities in the original (strokes that vary in width, inconsistent corner radii) are exactly what should be corrected.
 
-## 目录
+## Contents
 
-1. 什么时候做
-2. 画法约定
-3. 重绘步骤
-4. 对比与迭代
-5. 按图层上色
-6. 示例
-
----
-
-## 1. 什么时候做
-
-阶段 3 结束、用户说「骨架定了」之后，进入上色之前（阶段 3.5）。
-
-先问一句：「要不要把这个骨架重绘成精确的 SVG？之后上色会直接用色值，形状不会再变。」用户只想要一张图看看效果时，可以跳过，直接用图像模型上色。
+1. When to do it
+2. Drawing conventions
+3. Redraw steps
+4. Comparison and iteration
+5. Coloring by layer
+6. Example
 
 ---
 
-## 2. 画法约定
+## 1. When to do it
+
+After stage 3 ends and the user says "the skeleton is settled", before coloring (stage 3.5).
+
+Ask first: "Shall I redraw this skeleton as a precise SVG? Coloring will then use exact color values and the shape will not change." If the user only wants a single image to look at, skip it and color with the image model.
+
+---
+
+## 2. Drawing conventions
 
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!-- 模数 w = 74；圆角 R = 60；……（在注释里写清所有基准值） -->
+  <!-- module w = 74; corner radius R = 60; ... (state every base value in the comment) -->
   <rect id="bg" width="1024" height="1024" fill="#F7F7F5"/>
-  <g id="skeleton" fill="#1A1A1A"> … 主结构、外轮廓 … </g>
-  <g id="focus" fill="#1A1A1A"> … 需要单独上色的部件（没有就省略）… </g>
+  <g id="skeleton" fill="#1A1A1A"> … main structure, outer contour … </g>
+  <g id="focus" fill="#1A1A1A"> … parts that need their own color (omit if none) … </g>
 </svg>
 ```
 
-- **画布**：`viewBox="0 0 1024 1024"`，标志居中，四周留 20%–25% 的边距。
-- **图层 id 固定**：`bg`、`skeleton`、`focus`。上色脚本靠这三个 id 填色。单色版时所有图层都用 `#1A1A1A`。
-- **`bg` 就是 App 图标容器**，永远是满画布的方块（系统会裁成超椭圆）。如果骨架本身是「实心容器 + 负空间」（如圆角方块里切出 S），不要在 `bg` 上再画一个方块：容器直接用 `bg`，负空间形状画在 `skeleton` 里，把 S 放大到适合图标的比例。否则上色后会出现方框套方框。
-- **注释写模数**：在 SVG 开头注释里写出 w、圆角半径、关键间距，所有坐标都由它们推出来。
-- **只用有来历的形状**：`circle`、`path` 里的直线段 `H` `V` `L`、圆弧 `A`（用于同心弧、整圆段），以及按下面规则构造的 G² 转角 `C`。不画凭手感拖出来的自由贝塞尔曲线。
-- **转角要曲率连续（G²）**：直线直接接圆弧只有 G¹，转角处有「接头」，看起来像机械死圆。`rect` 的 `rx` 也是这种圆弧转角，所以有圆角的方块也用 `path` 画。G² 转角的画法：
-  - 用一段三次贝塞尔 `C` 替代半径为 R 的圆弧；
-  - 起点和终点分别在两条边上、距角点约 **2.3R**；
-  - **两个控制点都放在角点上**。
+- **Canvas**: `viewBox="0 0 1024 1024"`, the mark centered with a 20%–25% margin around it.
+- **Fixed layer ids**: `bg`, `skeleton`, `focus`. The coloring script fills colors by these three ids. In the monochrome version, all layers use `#1A1A1A`.
+- **`bg` is the app-icon container** and is always a full-canvas square (the system crops it to a squircle). If the skeleton itself is "solid container + negative space" (for example an S cut out of a rounded square), do not draw another square on `bg`: use `bg` directly as the container, draw the negative-space shape in `skeleton`, and scale the S to a size that suits an icon. Otherwise a box inside a box appears after coloring.
+- **Write the module in a comment**: at the start of the SVG, state w, the corner radius and the key clearances; every coordinate is derived from them.
+- **Use only shapes with a lineage**: `circle`, straight segments `H` `V` `L` in a `path`, circular arcs `A` (for concentric arcs and full-circle segments), and G² corners `C` built by the rule below. Do not draw free Béziers dragged out by feel.
+- **Corners must be curvature-continuous (G²)**: a straight line meeting a circular arc is only G¹, so the corner has a "joint" and looks like a mechanical dead circle. The `rx` of a `rect` is also this kind of circular-arc corner, so draw squares with rounded corners using a `path` as well. How to draw a G² corner:
+  - Replace the circular arc of radius R with a single cubic Bézier `C`.
+  - Place the start and end points on the two edges, about **2.3R** from the corner point.
+  - **Put both control points on the corner point.**
 
-  这样转角两端的曲率为 0，和直线无缝衔接；转角最深处的位置和半径 R 的圆弧相同。想要更柔和的转角，把 2.3R 加大。
+  This makes the curvature 0 at both ends of the corner, so it meets the straight lines seamlessly; the position of the deepest point of the corner is the same as for an arc of radius R. For a softer corner, increase 2.3R.
 
-  例：从上边 `(x1, y)` 走到右边，角点在 `(xc, y)`，R = 40：`H xc-92 C xc y, xc y, xc y+92`。
-- **布尔运算**：
-  - 加（并集）：多个形状放在同一个 `<g>` 里。
-  - 减（差集 / 负空间）：用 `<mask>`，白色保留、黑色挖掉。
-  - 交（交集）：用 `<clipPath>`，把一个形状裁到另一个形状内（如两个圆相交得到叶瓣）。
-  - 闭合环形：用 `fill-rule="evenodd"` 的复合路径（外轮廓 + 内轮廓）。
-- **线条**：可以用 `stroke` 画等宽通道，宽度 = w。转角按上面的 G² 规则，不用尖角。
-- **坐标取整**：尽量用整数，或模数的整数倍。
-- **不写**：滤镜、阴影、渐变（单色阶段）、文字、外部图片。
-
----
-
-## 3. 重绘步骤
-
-1. **读原图**：看清结构，估出关键尺寸（外框位置与大小、线宽、圆角、各段的位置）。原图可能是缩略图，坐标要换算到 1024 画布。
-2. **定模数**：选一个 w，让主要尺寸都是 w 的倍数或简单分数。
-3. **写 SVG**：按约定写，注释里写清基准值。
-4. **渲染对比**（见第 4 节）。
-5. **迭代**：每轮只修一类问题（位置 → 比例 → 细节），通常 2–3 轮。
-6. **小尺寸检查**：对渲染出的 PNG 运行 `make_preview.py`。
-7. **给用户看**：把重绘结果和原图并排放进对照页，说明修正了哪些不规整。
+  Example: going from the top edge `(x1, y)` to the right edge, with the corner point at `(xc, y)` and R = 40: `H xc-92 C xc y, xc y, xc y+92`.
+- **Boolean operations**:
+  - Add (union): put several shapes in the same `<g>`.
+  - Subtract (difference / negative space): use a `<mask>`; white is kept, black is cut away.
+  - Intersect: use a `<clipPath>` to clip one shape to another (for example two circles intersecting to give a leaf).
+  - Closed rings: use a compound path with `fill-rule="evenodd"` (outer contour + inner contour).
+- **Lines**: you may use `stroke` to draw equal-width channels with width = w. Corners follow the G² rule above; no sharp corners.
+- **Round coordinates**: prefer integers, or integer multiples of the module.
+- **Do not write**: filters, shadows, gradients (in the monochrome stage), text, external images.
 
 ---
 
-## 4. 对比与迭代
+## 3. Redraw steps
+
+1. **Read the original**: understand the structure and estimate the key dimensions (position and size of the outer frame, stroke width, corner radius, position of each segment). The original may be a thumbnail, so convert coordinates to the 1024 canvas.
+2. **Fix the module**: choose a w so that the main dimensions are multiples or simple fractions of w.
+3. **Write the SVG**: follow the conventions, and state the base values in the comment.
+4. **Render and compare** (see section 4).
+5. **Iterate**: fix one class of problem per round (position → proportion → detail), usually 2–3 rounds.
+6. **Check small sizes**: run `make_preview.py` on the rendered PNG.
+7. **Show the user**: put the redraw next to the original on the review page and explain which irregularities you corrected.
+
+---
+
+## 4. Comparison and iteration
 
 ```bash
 python scripts/render_svg.py output/A3.svg --source output/A3.png \
-  --name A3-svg --direction "A3 · SVG 重绘" --rationale "模数 w=74，转角统一半径 50"
+  --name A3-svg --direction "A3 · SVG redraw" --rationale "module w=74, uniform corner radius 50"
 ```
 
-生成三样东西：
+This produces three things:
 
-- `A3-svg.png`：渲染图
-- `A3-svg-compare.png`：原图 / 重绘 / 叠加，三栏并排。叠加图里**红色 = 只在原图有，青色 = 只在 SVG 有**，灰黑 = 重合
-- `A3-svg.json`：对照页用的记录
+- `A3-svg.png`: the rendered image
+- `A3-svg-compare.png`: original / redraw / overlay, side by side. In the overlay, **red = only in the original, cyan = only in the SVG**, grey-black = coincident
+- `A3-svg.json`: the record used by the review page
 
-一定要打开对比图看一遍。常见情况：
+Always open the comparison image and look at it. Common cases:
 
-- 大片红或青错开 → 整体位置或比例算错了（比如把对比图的标题栏高度也算进了坐标）。
-- 只有边缘一圈细细的红或青 → 位置对了，只差线宽或圆角。
-- 差异集中在原图本来就不规整的地方 → 这是重绘应有的修正，不用追。
+- Large patches of red or cyan, shifted → the overall position or proportion is wrong (for example, the height of the title bar of the comparison image was included in the coordinates).
+- Only a thin ring of red or cyan along the edges → the position is right and only stroke width or corner radius is off.
+- The differences concentrate where the original was irregular → this is the correction a redraw should make; do not chase it.
 
-脚本会打印一个「轮廓差异占比」，只作参考：通常降到 5% 以下就说明结构对上了。
+The script prints a "contour difference ratio", for reference only: once it drops below 5%, the structure usually matches.
 
 ---
 
-## 5. 按图层上色
+## 5. Coloring by layer
 
-骨架 SVG 定下后，阶段 4 优先在 SVG 上上色，颜色精确、形状不变，不消耗 API 额度：
+Once the skeleton SVG is settled, stage 4 colors the SVG first: the colors are exact, the shape does not change, and no API quota is used:
 
 ```bash
 python scripts/render_svg.py output/A3.svg --name A3-c1 --stage color \
-  --direction "A3 · 双色" --colors "skeleton=#17120C,focus=#FF7622,bg=#FAF7F2"
+  --direction "A3 · two-color" --colors "skeleton=#17120C,focus=#FF7622,bg=#FAF7F2"
 ```
 
-- 输出带颜色的 `A3-c1.svg` 和 `A3-c1.png`。
-- 颜色写成 `图层=#RRGGBB`，用逗号分隔。SVG 里没有的图层会提示。
-- **渐变**：脚本只处理纯色。要渐变时，由 Claude 直接在 SVG 里写 `<linearGradient>`，按 `color_dressing.md` 的规则选颜色和方向，再用 `render_svg.py` 渲染（不传 `--colors`）。
-- 想要带光感、材质的展示图时，再把渲染出的 PNG 作为参考图交给图像模型（`prompt_templates.md` 第 4 节）。
+- It outputs the colored `A3-c1.svg` and `A3-c1.png`.
+- Write colors as `layer=#RRGGBB`, separated by commas. A layer that is not in the SVG is reported.
+- **Gradients**: the script handles only solid colors. For a gradient, Claude writes the `<linearGradient>` directly in the SVG, chooses colors and direction by the rules in `color_dressing.md`, and renders with `render_svg.py` (without `--colors`).
+- To get a showcase image with lighting and material, hand the rendered PNG to the image model as a reference image (section 4 of `prompt_templates.md`).
 
 ---
 
-## 6. 示例
+## 6. Example
 
-`assets/example_svg_s_office.svg`：圆角方块里用负空间切出 S。演示了图层 id、模数注释、`mask` 做布尔减法。注意：这个示例的转角还是圆弧（G¹），只用来参考结构写法；实际重绘时转角按第 2 节的 G² 规则画。
+`assets/example_svg_s_office.svg`: an S cut out of a rounded square with negative space. It demonstrates layer ids, the module comment and boolean subtraction with `mask`. Note that this example's corners are still circular arcs (G¹); it serves only as a reference for how the structure is written. In an actual redraw, draw corners by the G² rule in section 2.

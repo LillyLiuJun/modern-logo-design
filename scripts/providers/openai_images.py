@@ -1,7 +1,7 @@
-"""ChatGPT 图像模型（OpenAI Images API）。
+"""ChatGPT image models (OpenAI Images API).
 
-无参考图走 images.generate；有参考图走 images.edit（最多 16 张参考图）。
-GPT 图像模型始终返回 base64。
+Without reference images it uses images.generate; with reference images it uses images.edit (up to 16 references).
+GPT image models always return base64.
 """
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ from providers import GenResult
 
 NAME = "openai"
 
-# 画幅 → 尺寸。标准尺寸所有 GPT 图像模型都支持；其他比例交给模型自动决定。
+# Aspect ratio -> size. Standard sizes are supported by all GPT image models; other ratios are left to the model.
 SIZES = {"1:1": "1024x1024", "3:2": "1536x1024", "2:3": "1024x1536"}
 MIME = {"png": "image/png", "jpeg": "image/jpeg", "webp": "image/webp"}
 
