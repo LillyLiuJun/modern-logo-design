@@ -2,7 +2,7 @@
 
 [简体中文](README.md) | **English**
 
-A Claude skill for designing modern product logos: **skeleton first, color later**. Translating fuzzy brand ideas into marks with Bauhaus inevitability, mathematical order, high-order curvature tension, and OS-grade craft.
+A skill for designing modern product logos: **skeleton first, color later**. Translating fuzzy brand ideas into marks with Bauhaus inevitability, mathematical order, high-order curvature tension, and OS-grade craft.
 
 <p align="center">
   <img src="assets/example_svg_s_office.svg" width="240" alt="Example: rounded square with a negative-space S">
