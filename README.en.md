@@ -60,19 +60,19 @@ The repository is private, so you must be signed in to GitHub first. Using `gh` 
 
 ```bash
 gh auth login        # skip if already signed in
-gh repo clone LillyLiuJun/modern-logo-methodology ~/.claude/skills/modern-logo-methodology
+gh repo clone LillyLiuJun/modern-logo-design ~/.claude/skills/modern-logo-design
 ```
 
 Or with plain git (requires access to the repository):
 
 ```bash
-git clone https://github.com/LillyLiuJun/modern-logo-methodology.git ~/.claude/skills/modern-logo-methodology
+git clone https://github.com/LillyLiuJun/modern-logo-design.git ~/.claude/skills/modern-logo-design
 ```
 
 **2. Install dependencies and create the config file**
 
 ```bash
-cd ~/.claude/skills/modern-logo-methodology
+cd ~/.claude/skills/modern-logo-design
 pip install -r requirements.txt
 cp .env.example .env
 ```
@@ -164,7 +164,7 @@ python scripts/make_preview.py output/A1.png
 ## Layout
 
 ```
-modern-logo-methodology/
+modern-logo-design/
 ├── SKILL.md                    # Workflow (stages 0–4)
 ├── README.md / README.en.md    # Chinese / English docs
 ├── .env.example                # API config template

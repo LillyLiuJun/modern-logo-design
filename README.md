@@ -58,19 +58,19 @@ Logo 不是画作或装饰贴纸，而是一种拥有固有结构与数学规律
 
 ```bash
 gh auth login        # 已登录可跳过
-gh repo clone LillyLiuJun/modern-logo-methodology ~/.claude/skills/modern-logo-methodology
+gh repo clone LillyLiuJun/modern-logo-design ~/.claude/skills/modern-logo-design
 ```
 
 或者直接用 git（需要有该仓库的访问权限）：
 
 ```bash
-git clone https://github.com/LillyLiuJun/modern-logo-methodology.git ~/.claude/skills/modern-logo-methodology
+git clone https://github.com/LillyLiuJun/modern-logo-design.git ~/.claude/skills/modern-logo-design
 ```
 
 **2. 安装依赖，生成配置文件**
 
 ```bash
-cd ~/.claude/skills/modern-logo-methodology
+cd ~/.claude/skills/modern-logo-design
 pip install -r requirements.txt
 cp .env.example .env
 ```
@@ -162,7 +162,7 @@ python scripts/make_preview.py output/A1.png
 ## 目录
 
 ```
-modern-logo-methodology/
+modern-logo-design/
 ├── SKILL.md                    # 流程（阶段 0–4）
 ├── README.md / README.en.md    # 中文 / 英文说明
 ├── .env.example                # API 配置模板
