@@ -2,7 +2,7 @@
 
 **简体中文** | [English](README.en.md)
 
-为产品设计现代 logo 的 Claude skill：**先骨架，后颜色**。将感性、发散、具象的品牌需求，翻译为具备包豪斯必然性、现代数学秩序、高阶曲率张力与操作系统级质感的工程级矢量 logo。
+为产品设计现代 logo 的 skill：**先骨架，后颜色**。将感性、发散、具象的品牌需求，翻译为具备包豪斯必然性、现代数学秩序、高阶曲率张力与操作系统级质感的工程级矢量 logo。
 
 <p align="center">
   <img src="assets/example_svg_s_office.svg" width="240" alt="示例：圆角方块 + 负空间 S">
