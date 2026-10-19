@@ -12,7 +12,7 @@
     </td>
     <td align="center" width="25%">
       <img src="assets/showcase/s-negative-space.png" width="150" alt="圆角方块里的负空间 S"><br>
-      <sub>圆角方块<br>负空间 S</sub>
+      <sub>S<br>效率类 App</sub>
     </td>
     <td align="center" width="25%">
       <img src="assets/showcase/fung-lockup.png" width="150" alt="Fung logo：购物车图标与衬线字标"><br>
@@ -90,7 +90,7 @@ cp .env.example .env
 
 这些对应 skill 的「阶段 1：信息收集」。没想好的写「不确定，由你推荐」。之后 skill 会推导 3–4 个方向，每轮生成一个 HTML 对照页。
 
-## 如何逼近你想要的感觉
+## 逼近你想要的感觉
 
 好 Logo 很少一轮就抽中，它是「推导骨架 → 诊断问题 → 每次只改一处」逐步收敛的。两个方法：
 
