@@ -15,8 +15,8 @@
       <sub>圆角方块<br>负空间 S</sub>
     </td>
     <td align="center" width="25%">
-      <img src="assets/showcase/tree-light.png" width="150" alt="浅底大树标"><br>
-      <sub>大树标<br>浅底</sub>
+      <img src="assets/showcase/fung-lockup.png" width="150" alt="Fung logo：购物车图标与衬线字标"><br>
+      <sub>Fung<br>图标 + 衬线字标</sub>
     </td>
     <td align="center" width="25%">
       <img src="assets/showcase/tree-reversed.png" width="150" alt="深底反白大树标"><br>

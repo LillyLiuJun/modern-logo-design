@@ -15,8 +15,8 @@ A skill for designing modern product logos: **skeleton first, color later**. Tra
       <sub>Rounded square<br>negative-space S</sub>
     </td>
     <td align="center" width="25%">
-      <img src="assets/showcase/tree-light.png" width="150" alt="Tree mark on a light base"><br>
-      <sub>Tree mark<br>light</sub>
+      <img src="assets/showcase/fung-lockup.png" width="150" alt="Fung logo: cart icon with a serif wordmark"><br>
+      <sub>Fung<br>icon + serif wordmark</sub>
     </td>
     <td align="center" width="25%">
       <img src="assets/showcase/tree-reversed.png" width="150" alt="Tree mark reversed on a dark base"><br>
