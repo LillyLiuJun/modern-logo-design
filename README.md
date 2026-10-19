@@ -12,7 +12,7 @@ A skill for designing modern product logos: **skeleton first, color later**. Tra
     </td>
     <td align="center" width="25%">
       <img src="assets/showcase/s-negative-space.png" width="150" alt="Rounded square with a negative-space S"><br>
-      <sub>Rounded square<br>negative-space S</sub>
+      <sub>S<br>productivity app</sub>
     </td>
     <td align="center" width="25%">
       <img src="assets/showcase/fung-lockup.png" width="150" alt="Fung logo: cart icon with a serif wordmark"><br>
@@ -90,7 +90,7 @@ Tell your agent what you are making (example: Poplex):
 
 These map to the skill's Stage 1: Brief. For anything undecided, write "unsure, you recommend". The skill then derives 3–4 distinct directions and builds an HTML review page each round.
 
-## How to Converge on the Mark You Want
+## Converge on the Mark You Want
 
 Great logos are rarely hit in one roll. They converge: derive a skeleton, diagnose it, change one thing. Two techniques help:
 
